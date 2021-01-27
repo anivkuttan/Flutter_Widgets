@@ -1,0 +1,199 @@
+
+
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatefulWidget {
+
+  @override
+
+  _MyAppState createState() => _MyAppState();
+
+}
+
+class _MyAppState extends State<MyApp> {
+
+  String bodyName = "Hello Anikuttan";
+
+  @override
+
+  Widget build(BuildContext context) {
+
+    return MaterialApp(
+
+      debugShowCheckedModeBanner: false,
+
+      title: "Scaffold widget",
+
+      home: Scaffold(
+
+/*------------Body of scaffold ---------*/
+
+        body: Center(
+
+          child: Text(
+
+            bodyName, // variable name ✓
+
+            style: TextStyle(
+
+              fontSize: 36,
+
+            ), // textstyle
+
+          ), //text
+
+        ), // center
+
+/*--------AppBar class-------------*/
+
+        appBar: AppBar(
+
+          title: Text("Scaffold Widget"),
+
+          //-------------------------------------------------
+
+          /* When using Drawer class leading is defalut to come with darwer */
+
+          /*    leading: IconButton(
+
+            icon: Icon(Icons.save),
+
+            onPressed: () {
+
+              setState(() {
+
+                bodyName = "You Clicked Save Button";
+
+              }); // setstate
+
+            }, //onpress
+
+          ), */
+
+//_________________________________________________
+
+          leadingWidth: 30.0, //iconbutton leading
+
+          actions: <Widget>[
+
+            IconButton(
+
+              icon: Icon(Icons.add),
+
+              onPressed: () {},
+
+              color: Colors.red,
+
+            ),
+
+            IconButton(
+
+                icon: Icon(Icons.check),
+
+                onPressed: () {},
+
+                color: Colors.purple),
+
+          ], //actions
+
+        ), //appbar
+
+// -----------Drawer-------------//
+
+        drawer: Container(
+
+          width: 80,
+
+          color: Colors.orange,
+
+          child: Column(
+
+            children: <Widget>[
+
+              Icon(Icons.add),
+
+            ],
+
+          ), //column
+
+        ), // container darwer
+
+        endDrawer: Drawer(
+
+          child: ListView(children: <Widget>[
+
+            UserAccountsDrawerHeader(
+
+              accountName: Text("Anikuttan v"),
+
+              accountEmail: Text("anivkuttan@gmail.com"),
+
+              otherAccountsPictures: <Widget>[
+
+                CircleAvatar(
+
+                  backgroundColor: Colors.white,
+
+                ), //1st avatar
+
+                CircleAvatar(
+
+                  backgroundColor: Colors.white,
+
+                  child: Text("K"), //otheravatar
+
+                ),
+
+              ], //otheraccounts
+
+              currentAccountPicture: CircleAvatar(
+
+                backgroundColor: Colors.white,
+
+                child: Text("Ani"), // text
+
+              ), //currentavatar
+
+            ), //header
+
+            Divider(
+
+              color: Colors.black,
+
+              thickness: 2.0,
+
+            ), //devider
+
+            ListTile(
+
+                title: Text("Inbox"), leading: Icon(Icons.inbox)), //listtile
+
+            Divider(
+
+              height: 0.1,
+
+              color: Colors.black,
+
+              thickness: 1.0,
+
+            ), //devider
+
+            ListTile(
+
+                title: Text("Adding Message"),
+
+                leading: Icon(Icons.add)), //listtile
+
+          ]), // listview
+
+        ), //drawer
+
+      ), // scaffold
+
+    ); //material app
+
+  }
+
+}
