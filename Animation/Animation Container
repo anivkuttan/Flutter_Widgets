@@ -1,0 +1,79 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MyWidget(),
+    );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidget createState() => _MyWidget();
+}
+
+class _MyWidget extends State<MyWidget> {
+  double _height = 200.0;
+  double _width = 200.0;
+  bool isExpand = false;
+  animatedFunction() {
+    setState(() {
+      _height = _height == 200 ? 100 : 200;
+      _width = _width == 200 ? 100 : 200;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              InkWell(
+                child: AnimatedContainer(
+                  duration: Duration(seconds: 1),
+                  curve: Curves.fastOutSlowIn,
+                  height: _height,
+                  width: _width,
+                  color: Colors.orange,
+                  child: Text('InkWell'),
+                  // alignment:Alignment.center,
+                ),
+                onTap: () {
+                  animatedFunction();
+                },
+              ),
+              RaisedButton(
+                onPressed: () {
+                  animatedFunction();
+                },
+                child: Text('Animate'),
+              ),
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    isExpand = !isExpand;
+                  });
+                },
+                child: AnimatedContainer(
+                  duration: Duration(seconds: 2),
+                  height: isExpand ? 400 : 200,
+                  width: isExpand ? 400 : 200,
+                  color: isExpand ? Colors.blue : Colors.yellow,
+                ), //container
+              ), //inkwell
+            ]),
+      ),
+    );
+  }
+}
+//commit on master
