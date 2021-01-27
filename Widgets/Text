@@ -1,0 +1,103 @@
+import "package:flutter/material.dart";
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatefulWidget {
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  
+  List<TextSpan> myTextSpans =<TextSpan> [
+    TextSpan(text:"This is my Line" ),
+    TextSpan(text:" Wow Wow", style:TextStyle(color:Colors.blue,)  ),
+    TextSpan(text:" Wowwww wowwww"),
+    TextSpan(text:"Wowwww Wowwww" ),
+    TextSpan(text:"Wowwwww wowwww" )
+  ] ;
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Text("Hello",
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Colors.red,
+                    fontWeight: FontWeight.w200,
+                  )), // hello tex
+
+              Text("World",
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Colors.green.withOpacity(0.4),
+                    fontWeight: FontWeight.w900,
+                  )), //world tex
+
+              Text(
+                  "I'm Anikuttan this is my text for cheking the text span property it's everything ok fine otherwise i check the code",
+                  style: TextStyle(
+                    fontSize: 30,
+                    letterSpacing: 8,
+                    wordSpacing: 20,
+                  )), //ani tex
+
+              Text("Kuttan this this justifying the text in column widget ",
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                    fontSize: 30,
+                  )), //kuttan tex
+
+              Container(
+                height: 60,
+                width: 140,
+                color: Colors.yellow,
+                child: Text(
+                    "hello world this is justyifying text on container widget ",
+                    textAlign: TextAlign.end,
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+              ), // container
+
+              RichText(
+              text:TextSpan(
+                style:TextStyle(color:Colors.black,fontSize:35,), 
+              children:myTextSpans, ),// mylistvariable name 
+              overflow:TextOverflow.ellipsis, 
+              ), //richtext
+
+              RichText(
+                text: TextSpan(
+                  style: TextStyle(
+                    color: Colors.green,
+                    fontSize: 36,
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: "Hello ",
+                      style: TextStyle(
+                        color: Colors.purple,
+                      ),
+                    ),
+                    TextSpan(text: "Ani"),
+                    TextSpan(text:" Kuttan", style:TextStyle(
+                    color:Colors.blue,),  ) 
+                  ],
+                ),
+              ), // richtext
+
+              Container(
+                height: 50,
+                width: 130,
+                child: Text("hello"),
+                color: Colors.red,
+              ), //container/
+            ],
+          ), //column
+        ), //center
+      ), //scaffold
+    ); //Materiall app
+  }
+}
