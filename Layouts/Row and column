@@ -1,0 +1,70 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: Scaffold(body: Center(child: normalRow()) //center
+            ) //scaffold
+        );
+  }
+}
+
+Widget normalRow() {
+  return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      /* spaceAround,
+     * spaceEvenly, 
+     * spaceBetween,
+     * start,
+     * center,
+     * end,
+     */
+      crossAxisAlignment: CrossAxisAlignment.center,
+      /* start,
+     * end
+     * center
+     */
+
+      children: <Widget>[
+        Expanded(
+          flex: 2,
+          child: myWidget(
+            Colors.pink,
+            "pink",
+          ),
+        ),
+        myWidget(
+          Colors.yellow,
+          "yellow",
+        ),
+        myWidget(
+          Colors.blue,
+          "blue",
+        ),
+        Expanded(
+          flex: 1,
+          child: myWidget(
+            Colors.green,
+            "green",
+          ),
+        ),
+        myWidget(
+          Colors.red,
+          "Red",
+        ),
+      ]); //row;
+}
+
+Widget myWidget(Color myColor, String title) {
+  return Container(
+    color: myColor,
+    height: 70,
+    width: 50,
+    alignment: Alignment.center,
+    margin: EdgeInsets.all(5),
+    padding: EdgeInsets.all(5),
+    child: Text(title),
+  );
+}
