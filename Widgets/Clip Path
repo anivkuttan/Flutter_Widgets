@@ -1,0 +1,48 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Center(
+          child: MyWidget(),
+        ),
+      ),
+    );
+  }
+}
+
+class MyWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ClipPath(
+      clipper:MyClipper(),
+      child:Container(
+    height:200,width:200,
+    child:Text("Clip Path",style:TextStyle(color:Colors.white,fontSize:30,),//style
+),//text
+color:Colors.purple,alignment:Alignment.center,
+),//container
+);//cliper
+  }
+}
+
+class MyClipper extends CustomClipper<Path>{
+@override
+  Path getClip(Size size){
+    var path = Path();
+    path.lineTo(0,0);
+    path.lineTo(size.height,0);
+    path.lineTo(0,size.width);
+    path.close();
+    return path;
+  }
+  @override 
+  bool shouldReclip(CustomClipper oldCliper) => false;
+}
