@@ -1,0 +1,48 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: MyWidgetClass(),
+      ), //scaffold
+    );
+  }
+}
+
+class MyWidgetClass extends StatefulWidget {
+  @override
+  _MyWidgetClassState createState() => _MyWidgetClassState();
+}
+
+class _MyWidgetClassState extends State<MyWidgetClass> {
+  bool _isSwitchOn = true;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        SwitchListTile(
+          title: Text("Dark"),
+          value: _isSwitchOn,
+          onChanged: (value) {
+            setState(() {
+              _isSwitchOn = value;
+            });
+          },
+          activeColor: Colors.orange,
+          contentPadding: EdgeInsets.only(left: 30, right: 70),
+          inactiveTrackColor: Colors.blue,
+          subtitle: Text("second subtitle"),
+          //controlAffinity:ListTileControlAffinity.leading,
+          secondary: Icon(Icons.save, color: Colors.green),
+        ), //tile
+        //  SwitchListTile(),//tile
+        //  SwitchListTile(),//tile
+      ],
+    );
+  }
+}
