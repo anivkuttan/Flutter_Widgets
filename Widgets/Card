@@ -1,0 +1,127 @@
+import "package:flutter/material.dart";
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatefulWidget {
+
+  _MyAppState createState() => _MyAppState();
+
+}
+
+class _MyAppState extends State<MyApp> {
+
+  @override
+
+  Widget build(BuildContext context) {
+
+    return MaterialApp(
+
+      home: Scaffold(
+
+        appBar: AppBar(
+
+          title: Text("Card"), //text
+
+        ), //appbar
+
+        backgroundColor: Colors.grey[300],
+
+        body: Center(
+
+          child: Column(
+
+            children: <Widget>[
+
+              Card(
+
+                shape: RoundedRectangleBorder(
+
+                  borderRadius: BorderRadius.circular(15),
+
+                  side: BorderSide(width: 2, color: Colors.green),
+
+                ),
+
+                elevation: 20,
+
+                child: Container(
+
+                  width: 350,
+
+                  /* decoration: BoxDecoration(
+
+                    borderRadius: BorderRadius.circular(30),
+
+                  ), //dexoration */
+
+                  child: Column(
+
+                    children: <Widget>[
+
+                      ListTile(
+
+                        title: Text("This is Title"),
+
+                        subtitle: Text("This is second title"),
+
+                        leading: Icon(Icons.people),
+
+                      ), //tile
+
+                      Row(
+
+                          mainAxisAlignment: MainAxisAlignment.end,
+
+                          children: <Widget>[
+
+                            FlatButton(
+
+                              onPressed: () {},
+
+                              child: Text(
+
+                                "ok",
+
+                                style: TextStyle(color: Colors.blue), //style
+
+                              ), //text
+
+                            ), //flatbutton1
+
+                            FlatButton(
+
+                              onPressed: () {},
+
+                              child: Text(
+
+                                "Cancel",
+
+                                style: TextStyle(color: Colors.red), //style
+
+                              ), //text
+
+                            ), //button 2
+
+                          ]), //row
+
+                    ],
+
+                  ), //column
+
+                ), //child container
+
+              ), //card1
+
+            ], //[]widget
+
+          ), //column
+
+        ), //center
+
+      ), //scaffold
+
+    ); //Materiall app
+
+  }
+
+}
