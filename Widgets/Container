@@ -1,0 +1,165 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: Scaffold(
+            appBar: AppBar(title: Text("Container") //text
+                ), //appbar
+            body: Center(child: Container9() //containers
+                ) //center
+            ) //scaffold
+        ); //materialApp
+  }
+}
+
+class Container1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.red,
+      child: Text(
+        "Sample",
+        style: TextStyle(
+          fontSize: 35,
+          color: Colors.white,
+        ), //textstyle
+      ), //text
+      constraints: BoxConstraints.expand(width: 140),
+      //height: 300,
+      //width: 300,
+      alignment: Alignment.topRight,
+      /* topright,topleft,topcenter 
+       * center,centerleft,centerright
+       * bottomleft,bottomcenter*/
+    );
+  }
+}
+
+class ContainerBorder extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text(
+        "Hello",
+        style: TextStyle(color: Colors.white, fontSize: 26),
+      ), //text
+      height: 200, width: 200,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: Colors.green,
+        border: Border.all(
+          width: 6,
+          color: Colors.red,
+        ), //boder
+        borderRadius: BorderRadius.circular(20),
+      ), //decoration
+    );
+  }
+}
+
+class ContainerShadow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: Text("Hello"),
+        height: 200,
+        width: 200,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          border: Border.all(width: 3, color: Colors.black), //border
+          borderRadius: BorderRadius.circular(30),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.red,
+                offset: Offset(25.0, 30.0),
+                blurRadius: 10.0,
+                spreadRadius: 5.0),
+            BoxShadow(
+              color: Colors.grey,
+              offset: Offset(50.0, 60.0),
+              blurRadius: 10.0,
+              spreadRadius: 6.0,
+            )
+          ], //shadow
+        ) //decoration
+        );
+  }
+}
+
+class Container3 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: 300,
+        width: 200,
+        decoration: BoxDecoration(
+          color: Colors.green,
+          border: Border(
+            left: BorderSide(color: Colors.black, width: 6.0),
+            top: BorderSide(width: 7.0, color: Colors.yellow),
+            right: BorderSide(width: 8.0, color: Colors.blue),
+          ), //border
+        ) //decoration
+        );
+  }
+}
+
+class Container6 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+          border: Border.all(color: Colors.blueAccent, width: 2)),
+      child: Text('Simple Border'),
+    );
+  }
+}
+
+class Container7 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: 200,
+        width: 200,
+        decoration:
+            BoxDecoration(color: Colors.purple, shape: BoxShape.circle));
+  }
+}
+
+class Container9 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        border: Border(
+          top: BorderSide(width: 1.0, color: Color(0xFFFFFFFFFF)),
+          left: BorderSide(width: 1.0, color: Color(0xFFFFFFFFFF)),
+          right: BorderSide(width: 1.0, color: Color(0xFFFF000000)),
+          bottom: BorderSide(width: 1.0, color: Color(0xFFFF000000)),
+        ),
+      ),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 2.0),
+        decoration: const BoxDecoration(
+          border: Border(
+            top: BorderSide(width: 1.0, color: Color(0xFFFFDFDFDF)),
+            left: BorderSide(width: 1.0, color: Color(0xFFFFDFDFDF)),
+            right: BorderSide(width: 1.0, color: Color(0xFFFF7F7F7F)),
+            bottom: BorderSide(width: 1.0, color: Color(0xFFFF7F7F7F)),
+          ),
+          color: Color(0xFFBFBFBF),
+        ),
+        child: const Text('OK',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Color(0xFF000000))),
+      ),
+    );
+  }
+}
