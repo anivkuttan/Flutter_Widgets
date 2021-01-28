@@ -33,8 +33,8 @@ class _MyWidgetState extends State<MyWidget> {
         ), //appba
         body: TabBarView(children: [
           stackTab(),
-          firstTab("Second child"),
-          firstTab("thired child"),
+          secondTab(),
+          thiredTab(),
         ]),
       ), //scaffold
     );
@@ -62,5 +62,60 @@ Widget stackTab() {
             color: Colors.yellow, width: 150, height: 150), //container
       ), //position
     ]),
+  );
+}
+
+Widget secondTab() {
+  return Padding(
+    padding: EdgeInsets.all(50),
+    child: Container(
+      color: Colors.grey,
+      height: double.infinity,
+      width: double.infinity,
+      child: Stack(children: [
+        Container(
+          height: 350,
+          width: 350,
+          color: Colors.yellow,
+        ), //1yellow
+        Container(color: Colors.red, height: 300, width: 300), //re
+        Positioned(
+          top: 700,
+          right: 100,
+          child: Container(
+              color: Colors.pink, height: 200, width: 200), //pinkcontainer
+        ), //pospink
+        Positioned(
+          top: 680,
+          right: 100,
+          child: Container(
+              decoration:
+                  BoxDecoration(color: Colors.yellow, shape: BoxShape.circle),
+              height: 100,
+              width: 100), //containeryellow
+        ), //pos
+      ]), //child stac
+    ), //padding
+  );
+}
+
+Widget thiredTab() {
+  return Center(
+    child: SizedBox(
+      height: 600,
+      width: 400,
+      child: Stack(
+        overflow:Overflow.visible,
+        children: [
+        Container(color: Colors.green), //green
+        Container(color: Colors.purple, height: 500, width: 350), //purple
+        Positioned(
+          top: -50,
+          right: -30,
+          child: Container(
+              color: Colors.black, height: 100, width: 100), //contaimer
+        ), //pos
+      ]), //stack
+    ), //sizedbox
   );
 }
