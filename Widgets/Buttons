@@ -30,6 +30,10 @@ class _MyWidgetState extends State<MyWidget> {
             onPressed: () {},
             child: Text("Elevated Button"),
           ), //bhtton
+          ElevatedButton(
+            onPressed: null,
+            child: Text("Disable Button"),
+          ), //elevated button
           TextButton(child: Text("Text Button"), onPressed: () {}), //textbutton
           ElevatedButton.icon(
             onPressed: () {},
@@ -39,9 +43,34 @@ class _MyWidgetState extends State<MyWidget> {
           ElevatedButton(
             onPressed: () {}, child: Text("Style Button"),
             style: ElevatedButton.styleFrom(
-                primary: Colors.yellow, 
-              onPrimary: Colors.red), //style
+              primary: Colors.yellow, // primary => backgroundColor
+              onPrimary: Colors.red, // text or icon color
+              textStyle: TextStyle(fontSize: 20, fontStyle: FontStyle.italic),
+              elevation: 30,
+              shadowColor: Colors.deepOrange,
+              padding: EdgeInsets.all(25),
+            ), //style
           ), //elevatedbutton
+          ElevatedButton(
+            onPressed: () {},
+            child: Text('Border'),
+            style: ElevatedButton.styleFrom(
+              primary: Colors.orange,
+              onPrimary: Colors.black,
+              side: BorderSide(width: 2.0, color: Colors.black),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text('Shape'),
+            style: ElevatedButton.styleFrom(
+              primary: Colors.amber,
+              onPrimary: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+          )
         ]), //colum
       ), //center
     );
