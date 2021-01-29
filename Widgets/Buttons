@@ -39,38 +39,70 @@ class _MyWidgetState extends State<MyWidget> {
             onPressed: () {},
             label: Text("Elevated.icon"),
             icon: Icon(Icons.save),
-          ), //ele ico
-          ElevatedButton(
-            onPressed: () {}, child: Text("Style Button"),
-            style: ElevatedButton.styleFrom(
-              primary: Colors.yellow, // primary => backgroundColor
-              onPrimary: Colors.red, // text or icon color
-              textStyle: TextStyle(fontSize: 20, fontStyle: FontStyle.italic),
-              elevation: 30,
-              shadowColor: Colors.deepOrange,
-              padding: EdgeInsets.all(25),
-            ), //style
-          ), //elevatedbutton
-          ElevatedButton(
-            onPressed: () {},
-            child: Text('Border'),
-            style: ElevatedButton.styleFrom(
-              primary: Colors.orange,
-              onPrimary: Colors.black,
-              side: BorderSide(width: 2.0, color: Colors.black),
-            ),
-          ),
-          ElevatedButton(
-            onPressed: () {},
-            child: Text('Shape'),
-            style: ElevatedButton.styleFrom(
-              primary: Colors.amber,
-              onPrimary: Colors.black,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-          )
+          ), //ele ic
+          ButtonBar(
+            children: [
+              ElevatedButton(
+                onPressed: () {}, child: Text("Style Button"),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.yellow, // primary => backgroundColor
+                  onPrimary: Colors.red, // text or icon color
+                  textStyle:
+                      TextStyle(fontSize: 20, fontStyle: FontStyle.italic),
+                  elevation: 30,
+                  shadowColor: Colors.deepOrange,
+                  padding: EdgeInsets.all(10),
+                ), //style
+              ), //elevatedbutton
+              ElevatedButton(
+                onPressed: () {},
+                child: Text('Border'),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.orange,
+                  onPrimary: Colors.black,
+                  side: BorderSide(width: 2.0, color: Colors.black),
+                ),
+              ), //Elevatedbutto
+
+              ElevatedButton(
+                onPressed: () {},
+                child: Text('Shape'),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.amber,
+                  onPrimary: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ), //shape
+                ), //style
+              ), //ElevatedButto
+
+              ElevatedButton(
+                onPressed: () {},
+                child: Text("Stadium Border"),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.yellow, onPrimary: Colors.red,
+                  side: BorderSide(width: 2, color: Colors.black), //side
+                  shape: StadiumBorder(),
+                ), //style
+              ), //elevatedbutto
+            ],
+          ), //buttonba
+          ButtonBar(
+            children: [
+              ElevatedButton(
+                onPressed: () {},
+                child: Text("Circle"),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.yellow, onPrimary: Colors.red,
+                  padding: EdgeInsets.all(30),
+                  side: BorderSide(width: 2, color: Colors.black), //side
+                  shape: CircleBorder(),
+                ), //style
+              ), //elevatedbutton
+
+              //----------------OtherProperties------------//
+            ],
+          ), //buttinbar
         ]), //colum
       ), //center
     );
