@@ -1,0 +1,49 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyWidget(),
+    );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("All Buttons"),
+      ), //appbar
+      body: Center(
+        child:
+            Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          ElevatedButton(
+            onPressed: () {},
+            child: Text("Elevated Button"),
+          ), //bhtton
+          TextButton(child: Text("Text Button"), onPressed: () {}), //textbutton
+          ElevatedButton.icon(
+            onPressed: () {},
+            label: Text("Elevated.icon"),
+            icon: Icon(Icons.save),
+          ), //ele ico
+          ElevatedButton(
+            onPressed: () {}, child: Text("Style Button"),
+            style: ElevatedButton.styleFrom(
+                primary: Colors.yellow, 
+              onPrimary: Colors.red), //style
+          ), //elevatedbutton
+        ]), //colum
+      ), //center
+    );
+  }
+}
