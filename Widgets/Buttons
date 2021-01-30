@@ -17,33 +17,65 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
+  String _data = "";
+  void _function(String _name) {
+    setState(() {
+      _data = _name;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add, size: 25),
+      ), //FloatingactionButton
       appBar: AppBar(
         title: Text("All Buttons"),
       ), //appbar
       body: Center(
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          Text(
+            "Comment No:$_data",
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+          ), //Text
+          //-------------Button: 1 -------------//
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              _function("1");
+            },
             child: Text("Elevated Button"),
           ), //bhtton
+
+          //-------------Button: 2 --------------//
           ElevatedButton(
             onPressed: null,
             child: Text("Disable Button"),
           ), //elevated button
-          TextButton(child: Text("Text Button"), onPressed: () {}), //textbutton
+          //--------------Button: 3 ------------//
+          TextButton(
+              child: Text("Text Button"),
+              onPressed: () {
+                _function("3");
+              }), //textbutton
+          //-------------Button: 4 ------------//
           ElevatedButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              _function("4");
+            },
             label: Text("Elevated.icon"),
             icon: Icon(Icons.save),
           ), //ele ic
           ButtonBar(
             children: [
+//------------------Button: 5 ----------------//
               ElevatedButton(
-                onPressed: () {}, child: Text("Style Button"),
+                onPressed: () {
+                  _function("5");
+                },
+                child: Text("Style Button"),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.yellow, // primary => backgroundColor
                   onPrimary: Colors.red, // text or icon color
@@ -54,8 +86,13 @@ class _MyWidgetState extends State<MyWidget> {
                   padding: EdgeInsets.all(10),
                 ), //style
               ), //elevatedbutton
+
+              //----------Button: 6 -----------//
+
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  _function("6");
+                },
                 child: Text('Border'),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.orange,
@@ -63,9 +100,11 @@ class _MyWidgetState extends State<MyWidget> {
                   side: BorderSide(width: 2.0, color: Colors.black),
                 ),
               ), //Elevatedbutto
-
+//------------------Button: 7 ----------------//
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  _function("7");
+                },
                 child: Text('Shape'),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.amber,
@@ -75,9 +114,11 @@ class _MyWidgetState extends State<MyWidget> {
                   ), //shape
                 ), //style
               ), //ElevatedButto
-
+//------------------Button: 8 ----------------//
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  _function("8");
+                },
                 child: Text("Stadium Border"),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.yellow, onPrimary: Colors.red,
@@ -89,8 +130,11 @@ class _MyWidgetState extends State<MyWidget> {
           ), //buttonba
           ButtonBar(
             children: [
+//------------------Button: 9 ----------------//
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  _function("9");
+                },
                 child: Text("Circle"),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.yellow, onPrimary: Colors.red,
@@ -99,8 +143,44 @@ class _MyWidgetState extends State<MyWidget> {
                   shape: CircleBorder(),
                 ), //style
               ), //elevatedbutton
-
-              //----------------OtherProperties------------//
+//------------------Button: 10 ----------------//
+//----------------OtherProperties------------//
+              ClipOval(
+                child: Material(
+                  //button
+                  color: Colors.purple,
+                  child: InkWell(
+                    onTap: () {
+                      _function("10");
+                    },
+                    splashColor: Colors.yellow,
+                    child: SizedBox(
+                      height: 70,
+                      width: 70,
+                      child: Icon(Icons.add, color: Colors.white),
+                    ), //sizedbox
+                  ), //inkwell
+                ), //material
+              ), //clipova
+//------------------Button: 11 ----------------//
+              InkWell(
+                onTap: () {
+                  _function("11");
+                },
+                child: Container(
+                  child: Text(
+                    "Button",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ), //style text
+                  ), // text child
+                  alignment: Alignment.center,
+                  height: 70,
+                  width: 70,
+                  decoration: BoxDecoration(
+                      color: Colors.pink, shape: BoxShape.circle), //dexoration
+                ), //contaimer
+              ) //inkwell
             ],
           ), //buttinbar
         ]), //colum
