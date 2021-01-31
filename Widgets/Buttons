@@ -27,8 +27,18 @@ class _MyWidgetState extends State<MyWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation:FloatingActionButtonLocation.miniStartTop, 
+      //Location:
+      // centerDocked,
+      // centerFloat
+      // endDocked
+      // endFloat
+      // endTop
+      // startTop
+      // miniStartTop
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {}, 
+        backgroundColor:Colors.pink, 
         child: Icon(Icons.add, size: 25),
       ), //FloatingactionButton
       appBar: AppBar(
@@ -157,7 +167,7 @@ class _MyWidgetState extends State<MyWidget> {
                     child: SizedBox(
                       height: 70,
                       width: 70,
-                      child: Icon(Icons.add, color: Colors.white),
+                      child: Icon(Icons.bluetooth , color: Colors.white),
                     ), //sizedbox
                   ), //inkwell
                 ), //material
