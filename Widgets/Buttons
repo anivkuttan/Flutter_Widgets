@@ -22,12 +22,12 @@ class _MyWidgetState extends State<MyWidget> {
     setState(() {
       _data = _name;
     });
-  }
+  } //void function
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation:FloatingActionButtonLocation.miniStartTop, 
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
       //Location:
       // centerDocked,
       // centerFloat
@@ -37,8 +37,8 @@ class _MyWidgetState extends State<MyWidget> {
       // startTop
       // miniStartTop
       floatingActionButton: FloatingActionButton(
-        onPressed: () {}, 
-        backgroundColor:Colors.pink, 
+        onPressed: () {},
+        backgroundColor: Colors.pink,
         child: Icon(Icons.add, size: 25),
       ), //FloatingactionButton
       appBar: AppBar(
@@ -114,13 +114,23 @@ class _MyWidgetState extends State<MyWidget> {
               ElevatedButton(
                 onPressed: () {
                   _function("7");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SpecialButtons(),
+                      ));
                 },
                 child: Text('Shape'),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.amber,
                   onPrimary: Colors.black,
+                  elevation: 25,
+                  padding: EdgeInsets.all(20),
+                  textStyle: TextStyle(fontSize: 20),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(25),
+                        bottomRight: Radius.circular(25)), //radius
                   ), //shape
                 ), //style
               ), //ElevatedButto
@@ -167,7 +177,7 @@ class _MyWidgetState extends State<MyWidget> {
                     child: SizedBox(
                       height: 70,
                       width: 70,
-                      child: Icon(Icons.bluetooth , color: Colors.white),
+                      child: Icon(Icons.bluetooth, color: Colors.white),
                     ), //sizedbox
                   ), //inkwell
                 ), //material
@@ -195,6 +205,22 @@ class _MyWidgetState extends State<MyWidget> {
           ), //buttinbar
         ]), //colum
       ), //center
+    );
+  }
+}
+
+class SpecialButtons extends StatefulWidget {
+  @override
+  _SpecialButtonState createState() => _SpecialButtonState();
+}
+
+class _SpecialButtonState extends State<SpecialButtons> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("SpecialButton"),
+      ),
     );
   }
 }
