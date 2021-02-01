@@ -220,7 +220,24 @@ class _SpecialButtonState extends State<SpecialButtons> {
     return Scaffold(
       appBar: AppBar(
         title: Text("SpecialButton"),
-      ),
+      ), //appbar
+      body: Align(alignment:Alignment.bottomLeft,
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          _popUpMenuButton_1(),
+        ]),
+      ), //center
     );
   }
+}
+
+Widget _popUpMenuButton_1() {
+  return PopupMenuButton<int>(
+    offset:Offset(50,60),
+      itemBuilder: (context) => [
+            PopupMenuItem(
+              value: 1,
+              child: Container(
+                  color: Colors.red, height: 300), //container
+            ),
+          ]);
 }
