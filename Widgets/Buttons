@@ -215,29 +215,57 @@ class SpecialButtons extends StatefulWidget {
 }
 
 class _SpecialButtonState extends State<SpecialButtons> {
+  String _name = "Unknown";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("SpecialButton"),
       ), //appbar
-      body: Align(alignment:Alignment.bottomLeft,
+      body: Align(
+        alignment: Alignment.bottomLeft,
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          _popUpMenuButton_1(),
+          _button1(),
+          _button2(),
+          _button3(_name),
         ]),
       ), //center
     );
   }
 }
 
-Widget _popUpMenuButton_1() {
+Widget _button1() {
   return PopupMenuButton<int>(
-    offset:Offset(50,60),
+      offset: Offset(50, 60),
       itemBuilder: (context) => [
             PopupMenuItem(
               value: 1,
-              child: Container(
-                  color: Colors.red, height: 300), //container
+              child: Container(color: Colors.red, height: 300), //container
             ),
+          ]);
+}
+
+Widget _button2() {
+  return PopupMenuButton<int>(
+      itemBuilder: (context) => [
+            PopupMenuItem(
+              value: 1,
+              child: ListTile(title: Text("Anikuttan")),
+            ),
+          ]);
+}
+
+Widget _button3(String _name) {
+  return PopupMenuButton<String>(
+      onSelected: (value) {
+        _name = value;
+      },
+      itemBuilder: (context) => [
+            PopupMenuItem(
+              value: "Anikuttan1",
+              //This value is pass to onSelected parameter to do something
+              child: Text('Anikuttan 1 '),
+            ), //menuitem 1
+            PopupMenuItem(value: "u", child: Text(_name)), //item 2
           ]);
 }
