@@ -37,7 +37,10 @@ class _MyWidgetState extends State<MyWidget> {
       // startTop
       // miniStartTop
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Widget1()));
+        },
         backgroundColor: Colors.pink,
         child: Icon(Icons.add, size: 25),
       ), //FloatingactionButton
@@ -268,4 +271,52 @@ Widget _button3(String _name) {
             ), //menuitem 1
             PopupMenuItem(value: "u", child: Text(_name)), //item 2
           ]);
+}
+
+class Widget1 extends StatefulWidget {
+  @override
+  _Widget1State createState() => _Widget1State();
+}
+
+class _Widget1State extends State<Widget1> {
+  String currentMonth = "Jan";
+  List<String> _months = <String>[
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Button")), //appbar
+      body: Center(
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Text(currentMonth),
+          PopupMenuButton(
+            itemBuilder: (context) {
+              return _months
+                  .map((month) =>
+                          PopupMenuItem(value: month, child: Text(month)) //item
+                      )
+                  .toList();
+            },
+            onSelected: (value) {
+              setState(() {
+                currentMonth = value.toString();
+              });
+            },
+          ), //button
+        ]), //column
+      ), //center
+    );
+  }
 }
