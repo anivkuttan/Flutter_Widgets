@@ -218,7 +218,8 @@ class SpecialButtons extends StatefulWidget {
 }
 
 class _SpecialButtonState extends State<SpecialButtons> {
-  String _name = "Unknown";
+  List<String> _names = ["Ani", "Kuttan", "Anu", "Anikuttan"];
+  String _name = "Ani";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -231,8 +232,28 @@ class _SpecialButtonState extends State<SpecialButtons> {
           _button1(),
           _button2(),
           _button3(_name),
-        ]),
-      ), //center
+          DropdownButton(
+              //    hint:Text("DropDown"),//it not #how the seleted value
+              hint: _name == "Ani"
+                  ? Text("Select")
+                  : Text(
+                      _name,
+                      style: TextStyle(
+                          fontSize: 15, color: Colors.purple), //textstule
+                    ),
+              onChanged: (value) {
+                setState(() {
+                  _name = value.toString();
+                });
+              },
+              items: _names.map((String alfabet) {
+                return DropdownMenuItem(
+                  value: alfabet,
+                  child: Text("Select a value : $alfabet"),
+                );
+              }).toList()), //dropdown
+        ]), //column
+      ), //align
     );
   }
 }
