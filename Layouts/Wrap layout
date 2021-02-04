@@ -1,0 +1,107 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyWidget(),
+    );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Wrap Layout'),
+      ), //appbar
+      body: Center(
+        child: ListView(children: [
+//-----------------red_____________________//
+          Container(
+            height: 300,
+            color: Colors.grey[300],
+            child: Wrap(spacing:20,//spacing on main Axis defauld its horizontL axis
+                        runSpacing:10,//cross axis spacing
+                        children: [
+              box(Colors.purple),
+              box(Colors.orange),
+              box(Colors.indigo), 
+              box(Colors.brown),
+              box(Colors.green),
+              box(Colors.pink),
+            ]), //wrap
+          ),//comt@iner red
+      
+Divider(color:Colors.black, thickness :3), 
+          
+          Container(
+            height: 300,
+            color: Colors.grey[300],
+            child: Wrap(direction:Axis.vertical, 
+            
+            children: [
+              box(Colors.purple),
+              box(Colors.orange),
+              box(Colors.indigo), 
+              box(Colors.brown),
+              box(Colors.green),
+              box(Colors.pink) , 
+              box(Colors.black)
+            ]), //wrap
+          ),//container
+          Divider(color:Colors.black,thickness :3), 
+          
+          Container(
+            height: 300,
+            color: Colors.grey[300],
+            child: Wrap(children: [
+              box(Colors.purple),
+              box(Colors.orange),
+              box(Colors.indigo), 
+              box(Colors.brown),
+              box(Colors.green),
+              box(Colors.pink),
+            ]), //wrap
+          ),//container3
+          Divider(color:Colors.black, thickness:3),
+          
+          Container(
+            height: 300,
+            color: Colors.grey[300],
+            child: Wrap(children: [
+              box(Colors.purple),
+              box(Colors.orange),
+              box(Colors.indigo), 
+              box(Colors.brown),
+              box(Colors.green),
+              box(Colors.pink),
+            ]), //wrap
+          ),//container4
+          
+        ]), //listview
+      ), //center
+    );
+  }
+}
+
+Widget box(Color color) {
+  return Container(
+    color: color,
+    height: 100,
+    width: 120,
+    alignment: Alignment.center,
+    child: Text(
+      "Box",
+      style: TextStyle(fontSize: 30, color: Colors.white),
+    ),
+  );
+}
