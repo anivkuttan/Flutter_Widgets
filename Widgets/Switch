@@ -1,0 +1,53 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyWidget(),
+    );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  bool _switchOne = false;
+  bool _switchTwo = false;
+
+  void _change1(bool value) => setState(() => _switchOne = value);
+  void _change2(bool value) => setState(() => _switchTwo = value);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Switch AppBar"),
+      ), //appbar
+      body: Center(
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Switch(
+              value: _switchOne,
+              onChanged: (value) {
+                _change1(value);
+              },
+              activeColor: Colors.green,
+              activeTrackColor: Colors.purple,
+              inactiveTrackColor: Colors.red,
+              inactiveThumbColor: Colors.black), //switch
+          Switch(
+            value: _switchTwo,
+            onChanged: (value) {
+              _change2(value);
+            },
+          ), //switch
+        ]), //column
+      ), //center
+    );
+  }
+}
