@@ -1,0 +1,62 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyWidget(),
+    );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  double _padding = 0;
+  double _opacity = 1;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("AppBar"),
+      ), //appba
+      body: ListView(
+        children: [
+          AnimatedOpacity(
+            duration: Duration(seconds: 1),
+            opacity: _opacity,
+            child: Icon(Icons.favorite, size: 90, color: Colors.red),
+          ), //animeopacity
+          ElevatedButton(
+            child: Text('Click Me'),
+            onPressed: () {
+              setState(() {
+                _opacity = _opacity == 1 ? 0.5 : 1;
+              });
+            },
+          ), //butto
+          AnimatedPadding(
+            duration: Duration(seconds: 2),
+            curve:Curves.fastOutSlowIn, 
+            padding: EdgeInsets.only(left:_padding),
+            child:
+                Container(height: 200, width: 200, color: Colors.pink), //child
+          ), //container
+          TextButton(
+            onPressed: () {
+              setState(() {
+                _padding = _padding == 0 ? 300 : 0;
+              });
+            },
+            child: Text('Padding'),
+          ), //text button
+        ],
+      ), //listview
+    );
+  }
+}
