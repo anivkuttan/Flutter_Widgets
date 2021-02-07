@@ -40,12 +40,13 @@ class _MyWidget extends State<MyWidget> {
             children: <Widget>[
               InkWell(
                 child: AnimatedContainer(
-                  duration: Duration(seconds: 1),
+                  duration: Duration(seconds: 3),
                   curve: Curves.fastOutSlowIn,
                   height: _height,
-                  width: _width,
+                  width: _width, 
+                  alignment:Alignment.center,
                   color: Colors.orange,
-                  child: Text('InkWell'),
+                  child: Text('InkWell Tap'),
                   // alignment:Alignment.center,
                 ),
                 onTap: () {
@@ -68,7 +69,7 @@ class _MyWidget extends State<MyWidget> {
                   duration: Duration(seconds: 2),
                   height: isExpand ? 400 : 200,
                   width: isExpand ? 400 : 200,
-                  color: isExpand ? Colors.blue : Colors.yellow,
+                  decoration:BoxDecoration(color:isExpand? Colors.yellow : Colors.purple, shape:BoxShape.circle) ,//decoration
                 ), //container
               ), //inkwell
             ]),
