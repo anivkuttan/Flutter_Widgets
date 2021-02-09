@@ -1,0 +1,71 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  bool isPlaying = false;
+  AnimationController animationController;
+  Animation<double> animation;
+
+  void initState() {
+    super.initState();
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 200),
+    );
+    animation =
+        CurvedAnimation(parent: animationController, curve: Curves.bounceInOut);
+  }
+
+  void dispose() {
+    super.dispose();
+    animationController.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Animation'),
+      ), //appBAr
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.add),
+            ), //iconbutton
+            InkWell(
+              child: AnimatedIcon(
+                  icon: AnimatedIcons.play_pause,
+                  progress: animation,
+                  size: 40),
+              onTap: () {
+                isPlaying
+                    ? animationController.forward()
+                    : animationController.reverse();
+                isPlaying = !isPlaying;
+              },
+            ), //inkwell
+          ],
+        ), //column
+      ), //center
+    );
+  }
+}
