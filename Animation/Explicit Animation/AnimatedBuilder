@@ -1,0 +1,69 @@
+import 'dart:math';
+
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  AnimationController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 3))
+          ..repeat();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Animation Builder'),
+      ), //appbar
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AnimatedBuilder(
+                animation: controller,
+                child: Container(
+                  color: Colors.yellow,
+                  height: 200,
+                  width: 200,
+                  alignment: Alignment.center,
+                  child: Text('Container'),
+                ), //container
+                builder: (context, child) {
+                  return Transform.rotate(
+                    angle: controller.value * pi,
+                    child: child,
+                  ); //teansform
+                }) //animationBuilder
+          ],
+        ), //column
+      ), //center
+    );
+  }
+}
