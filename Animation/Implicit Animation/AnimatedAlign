@@ -40,7 +40,7 @@ class _MyWidgetState extends State<MyWidget> {
               height: 55,
               width: 100,
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.yellow,
                 borderRadius: BorderRadius.all(Radius.circular(300)),
               ),
               child: AnimatedAlign(
@@ -56,36 +56,13 @@ class _MyWidgetState extends State<MyWidget> {
               ), //align
             ), //container
           ), //inkwell
-          Card(
-            child: SizedBox(
-              height: 400,
-              width: 600,
-              child: Column(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    height: 300,
-                    width: 500,
-                    color: Colors.blue,
-                    child: AnimatedAlign(
-                      duration: Duration(seconds: 2),
-                      alignment: cardAlignment,
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            cardAlignment = cardAlignment == Alignment.center
-                                ? Alignment.bottomLeft
-                                : Alignment.center;
-                          });
-                        },
-                        child: Text("hsj"),
-                      ), //inkwell
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            elevation: 20,
+
+          Container(
+            alignment: FractionalOffset(0.5,0.2), 
+            height: 300, 
+            width: 300,
+            color: Colors.grey, 
+            child: Text("Ani"), //child text
           ), //container
         ],
       ), //column
