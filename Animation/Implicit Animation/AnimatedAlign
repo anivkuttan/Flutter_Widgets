@@ -18,6 +18,7 @@ class MyWidget extends StatefulWidget {
 
 class _MyWidgetState extends State<MyWidget> {
   Alignment alignment = Alignment.centerRight;
+  Alignment cardAlignment = Alignment.center;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,37 +26,69 @@ class _MyWidgetState extends State<MyWidget> {
         title: Text("AppBar"),
       ), //appba
       body: Column(
-        children:[ InkWell(
-          onTap: () {
-            setState(() {
-              alignment = alignment == Alignment.centerRight
-                  ? Alignment.centerLeft
-                  : Alignment.centerRight;
-            });
-          },
-          child: Container(
-            padding: EdgeInsets.all(3),
-            height: 55,
-            width: 100,
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius :BorderRadius.all(Radius. circular(300) ) ,
+        children: [
+          InkWell(
+            onTap: () {
+              setState(() {
+                alignment = alignment == Alignment.centerRight
+                    ? Alignment.centerLeft
+                    : Alignment.centerRight;
+              });
+            },
+            child: Container(
+              padding: EdgeInsets.all(3),
+              height: 55,
+              width: 100,
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.all(Radius.circular(300)),
+              ),
+              child: AnimatedAlign(
+                alignment: alignment,
+                duration: Duration(seconds: 1),
+                curve: Curves.ease,
+                child: Container(
+                  height: 50,
+                  width: 50,
+                  decoration:
+                      BoxDecoration(color: Colors.red, shape: BoxShape.circle),
+                ), //childcontainer
+              ), //align
+            ), //container
+          ), //inkwell
+          Card(
+            child: SizedBox(
+              height: 400,
+              width: 600,
+              child: Column(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 300,
+                    width: 500,
+                    color: Colors.blue,
+                    child: AnimatedAlign(
+                      duration: Duration(seconds: 2),
+                      alignment: cardAlignment,
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            cardAlignment = cardAlignment == Alignment.center
+                                ? Alignment.bottomLeft
+                                : Alignment.center;
+                          });
+                        },
+                        child: Text("hsj"),
+                      ), //inkwell
+                    ),
+                  ),
+                ],
+              ),
             ),
-            child: AnimatedAlign(
-              alignment: alignment,
-              duration: Duration(seconds: 1),
-              curve: Curves.ease,
-              child: Container(
-                height: 50,
-                width: 50,
-                decoration:
-                    BoxDecoration(color: Colors.red, shape: BoxShape.circle),
-              ), //childcontainer
-            ), //align
+            elevation: 20,
           ), //container
-        ), //inkwell
-                  Card(child:SizedBox(height:400,width:600), elevation:20, ), //container
-     ],  ), //column
+        ],
+      ), //column
     );
   }
 }
