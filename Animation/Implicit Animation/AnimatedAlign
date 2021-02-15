@@ -24,8 +24,8 @@ class _MyWidgetState extends State<MyWidget> {
       appBar: AppBar(
         title: Text("AppBar"),
       ), //appba
-      body: Center(
-        child: InkWell(
+      body: Column(
+        children:[ InkWell(
           onTap: () {
             setState(() {
               alignment = alignment == Alignment.centerRight
@@ -34,27 +34,28 @@ class _MyWidgetState extends State<MyWidget> {
             });
           },
           child: Container(
-            padding: EdgeInsets.all(10),
-            height: 200,
-            width: 300,
+            padding: EdgeInsets.all(3),
+            height: 55,
+            width: 100,
             decoration: BoxDecoration(
               color: Colors.blue,
-              shape: BoxShape.circle ,
+              borderRadius :BorderRadius.all(Radius. circular(300) ) ,
             ),
             child: AnimatedAlign(
               alignment: alignment,
               duration: Duration(seconds: 1),
               curve: Curves.ease,
               child: Container(
-                height: 150,
-                width: 150,
+                height: 50,
+                width: 50,
                 decoration:
                     BoxDecoration(color: Colors.red, shape: BoxShape.circle),
               ), //childcontainer
             ), //align
           ), //container
         ), //inkwell
-      ), //center
+                  Card(child:SizedBox(height:400,width:600), elevation:20, ), //container
+     ],  ), //column
     );
   }
 }
