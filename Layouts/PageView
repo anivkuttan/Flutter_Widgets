@@ -19,6 +19,7 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
+  PageController controller = PageController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,10 +33,17 @@ class _MyWidgetState extends State<MyWidget> {
                     MaterialPageRoute(builder: (context) => FirstPage()));
               }), //iconAdd
           IconButton(
-              icon: Icon(Icons.arrow_back_ios),
-              onPressed: () {}), //icon back
+              icon: Icon(Icons.mail),
+              onPressed: () {
+                controller.animateToPage(2,
+                    duration: Duration(milliseconds: 500),
+                    curve: Curves.linear);
+              }), //icon back
           IconButton(
-              icon: Icon(Icons.arrow_forward_ios), onPressed: () {}), //forwardbutton
+              icon: Icon(Icons.arrow_forward_ios),
+              onPressed: () {
+
+              controller.animateToPage(3,duration:Duration(milliseconds :900),curve:Curves.linear) ;}), //forwardbutton
         ],
       ), //appbar
       body: Center(
@@ -45,7 +53,8 @@ class _MyWidgetState extends State<MyWidget> {
             children: [
               Container(color: Colors.indigo),
               Container(color: Colors.red),
-              Container(color: Colors.pink),
+              Container(color: Colors.yellow),
+              Container(color: Colors.purple),
             ]), //page view
       ), //center
     );
