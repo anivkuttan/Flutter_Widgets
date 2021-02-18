@@ -12,65 +12,76 @@ class MyApp extends StatelessWidget {
   }
 }
 
-//---------Page view defauld constructor---------//
 class MyWidget extends StatefulWidget {
   @override
   _MyWidgetState createState() => _MyWidgetState();
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  PageController controller = PageController();
+  PageController controller= PageController(initialPage:0) ;
+  int currentIndex =0;
+
+/*  @override
+  void initState() {
+    super.initState();
+    controller = PageController(initialPage:0);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }*/
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            FloatingActionButton(onPressed: () {}),
+            FloatingActionButton(onPressed: () {})
+          ]),
       appBar: AppBar(
-        title: Text("Default PagView"),
+        title: Text("AppBar"),
         actions: [
           IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => FirstPage()));
-              }), //iconAdd
-          IconButton(
-              icon: Icon(Icons.mail),
-              onPressed: () {
-                controller.animateToPage(2,
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.linear);
-              }), //icon back
-          IconButton(
-              icon: Icon(Icons.arrow_forward_ios),
-              onPressed: () {
-
-              controller.animateToPage(3,duration:Duration(milliseconds :900),curve:Curves.linear) ;}), //forwardbutton
+            onPressed: () {
+controller.animateToPage(--currentIndex,duration:Duration(milliseconds :500),curve:Curves.easeInOut);
+            },
+            icon: Icon(Icons.arrow_back_ios),
+          ),
+          IconButton(onPressed: () {
+controller.animateToPage(++currentIndex, //3,
+  duration :Duration(milliseconds :500),curve:Curves.easeInOut );
+          }, icon: Icon(Icons.arrow_forward_ios))
         ],
-      ), //appbar
-      body: Center(
-        child: PageView(
-            // pageSnapping:false,
-            //  scrollDirection: Axis.vertical,
-            children: [
-              Container(color: Colors.indigo),
-              Container(color: Colors.red),
-              Container(color: Colors.yellow),
-              Container(color: Colors.purple),
-            ]), //page view
-      ), //center
+      ), //appba
+      body: PageView(
+        controller:controller,
+        onPageChanged:(index){
+setState((){
+currentIndex = index;
+});
+        },
+        children: [
+        container(Colors.yellow, "Page One"),
+        container(Colors.purple, "Page Two"),
+        container(Colors.indigo, "Page Three"),
+        container(Colors.deepOrange, "Page Four"),
+      ] //children
+          ), //pageview
     );
   }
 }
 
-class FirstPage extends StatefulWidget {
-  @override
-  _FirstPageState createState() => _FirstPageState();
-}
-
-class _FirstPageState extends State<FirstPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('PageView. builder')), //appbar
-    );
-  }
+Widget container(Color color, String name) {
+  return Container(
+    color: color,
+    alignment: Alignment.center,
+    child: Text(
+      name,
+      style: TextStyle(fontSize: 36, color: Colors.white),
+    ),
+  );
 }
