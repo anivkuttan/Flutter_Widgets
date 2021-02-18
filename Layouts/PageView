@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyWidget(),
+      home: MyWidget  (),
     );
   }
 }
@@ -45,6 +45,9 @@ class _MyWidgetState extends State<MyWidget> {
       appBar: AppBar(
         title: Text("AppBar"),
         actions: [
+          IconButton(icon:Icon(Icons.add),onPressed:(){
+Navigator.push(context, MaterialPageRoute(builder:(context ) => FirstPage()  ) ) ;
+          } ), 
           IconButton(
             onPressed: () {
 controller.animateToPage(--currentIndex,duration:Duration(milliseconds :500),curve:Curves.easeInOut);
@@ -85,3 +88,24 @@ Widget container(Color color, String name) {
     ),
   );
 }
+
+//------------buildder------------——--//
+
+class FirstPage extends StatefulWidget {
+  @override
+  _FirstPageState createState() => _FirstPageState();
+}
+
+class _FirstPageState extends State<FirstPage> {
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+    appBar:AppBar(title:Text('Page View Builder') ), //appbar
+      body:PageView.builder(
+      itemCount:10,itemBuilder:(context, index){
+return Container(color:index%2==0? Colors.orange : Colors. deepOrange ) ;
+      }), //body
+    );
+  }
+} 
