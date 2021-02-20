@@ -8,8 +8,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text("DataTable")), //appbar
-        body: PageView(children: [MyWidget(), Container (child:Center (child :FirstPage(), ) , 
-                                                        ),  ]),
+        body: PageView(children: [
+          MyWidget(),
+          Container(
+            child: Center(
+              child: FirstPage(),
+            ),
+          ),
+        ]),
       ), //scaffold
     );
   }
@@ -21,9 +27,9 @@ class Employ {
   bool married;
   int salary;
   Employ({this.id, this.name, this.married, this.salary});
-
-  static getEmploy() {
-    final List<Employ> calicut = <Employ>[
+//return type List function ///
+  static List<Employ> getListOfUsers() {
+    return <Employ>[
       Employ(id: 2263, name: 'Anikuttan', married: false, salary: 15000),
       Employ(id: 1029, name: 'Iyappan', married: true, salary: 40000),
       Employ(id: 1038, name: 'ArunSelvam', married: false, salary: 31000),
@@ -78,18 +84,29 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
+  List<Employ> users;
+
+  @override
+  void initState() {
+    //making object on Employ
+    users = Employ.getListOfUsers();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DataTable(columns: <DataColumn>[
-      DataColumn(
-        label: Text('Id'),
-      ), //datacolumn id
-      DataColumn(label: Text('Name')), //datacolum
-      DataColumn(label: Text('Married ')), //married
-      DataColumn(label: Text('S@lary')),
-    ], //"olumns
-                    rows:<DataRow>[DataRow(cells:[DataCell(Text('gh' )), ],//cell#
-                                          ), //rows
-                                  ] );
+    return DataTable(
+      columns: <DataColumn>[
+        DataColumn(
+          label: Text('Id'),
+        ), //datacolumn id
+        DataColumn(label: Text('Name')), //datacolum
+        DataColumn(label: Text('Married ')), //married
+        DataColumn(label: Text('S@lary')),
+      ], //"columns
+      rows: users.map((worker) {
+        return DataRow();
+      }).toList(), //map
+    );
   }
 }
