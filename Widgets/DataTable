@@ -1,0 +1,48 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyWidget(),
+    );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  
+  // DataColumn() => label
+  // DataRow() => cells:[] => Datacell() 
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("AppBar"),
+      ), //appba
+      body: Center(
+        child: DataTable(columns: [
+          DataColumn(
+            label: Text("RollNo"),
+          ), //rollno column
+        ],//columns
+                         rows: [
+          DataRow(
+            cells: [DataCell(Text('1'))//datacel
+                   ],
+          ), //datarow first line row
+                           DataRow(cells:[DataCell(Text('2' ) ), //datacel 
+                                         ] ), 
+        ]//rows
+                        ), //tabel
+      ), //center
+    );
+  }
+}
