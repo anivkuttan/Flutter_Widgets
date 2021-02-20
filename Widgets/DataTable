@@ -6,8 +6,29 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyWidget(),
+      home: Scaffold(
+        appBar: AppBar(title: Text("DataTable")), //appbar
+        body: PageView(children: [MyWidget(), Container (child:Center (child :FirstPage(), ) , 
+                                                        ),  ]),
+      ), //scaffold
     );
+  }
+}
+
+class Employ {
+  int id;
+  String name;
+  bool married;
+  int salary;
+  Employ({this.id, this.name, this.married, this.salary});
+
+  static getEmploy() {
+    final List<Employ> calicut = <Employ>[
+      Employ(id: 2263, name: 'Anikuttan', married: false, salary: 15000),
+      Employ(id: 1029, name: 'Iyappan', married: true, salary: 40000),
+      Employ(id: 1038, name: 'ArunSelvam', married: false, salary: 31000),
+      Employ(id: 1167, name: 'Baskar', married: false, salary: 28000),
+    ];
   }
 }
 
@@ -17,32 +38,58 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  
   // DataColumn() => label
-  // DataRow() => cells:[] => Datacell() 
-  
+  // DataRow() => cells:[] => Datacell()
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("AppBar"),
-      ), //appba
-      body: Center(
-        child: DataTable(columns: [
-          DataColumn(
-            label: Text("RollNo"),
-          ), //rollno column
-        ],//columns
-                         rows: [
-          DataRow(
-            cells: [DataCell(Text('1'))//datacel
-                   ],
-          ), //datarow first line row
-                           DataRow(cells:[DataCell(Text('2' ) ), //datacel 
-                                         ] ), 
-        ]//rows
-                        ), //tabel
-      ), //center
-    );
+    return Center(
+      child: DataTable(columns: [
+        DataColumn(
+          label: Text("RollNo"),
+        ), //rollno column
+        DataColumn(
+          label: Text(
+            'Name',
+            style: TextStyle(color: Colors.red),
+          ),
+        ), //namecolumn
+      ], //columns
+          rows: [
+            DataRow(
+              cells: [
+                DataCell(Text('1')), //datacel
+                DataCell(Text('Ani')),
+              ],
+            ), //datarow first line row
+            DataRow(cells: [
+              DataCell(Text('2')), //datace
+              DataCell(Text('Kuttan')),
+            ]),
+          ] //rows
+          ), //tabel
+    ); //center
+  }
+}
+
+class FirstPage extends StatefulWidget {
+  @override
+  _FirstPageState createState() => _FirstPageState();
+}
+
+class _FirstPageState extends State<FirstPage> {
+  @override
+  Widget build(BuildContext context) {
+    return DataTable(columns: <DataColumn>[
+      DataColumn(
+        label: Text('Id'),
+      ), //datacolumn id
+      DataColumn(label: Text('Name')), //datacolum
+      DataColumn(label: Text('Married ')), //married
+      DataColumn(label: Text('S@lary')),
+    ], //"olumns
+                    rows:<DataRow>[DataRow(cells:[DataCell(Text('gh' )), ],//cell#
+                                          ), //rows
+                                  ] );
   }
 }
