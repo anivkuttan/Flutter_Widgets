@@ -6,34 +6,29 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: Text("DataTable")), //appbar
-        body: PageView(children: [
-          MyWidget(),
-          Container(
-            child: Center(
-              child: FirstPage(),
-            ),
-          ),
-        ]),
-      ), //scaffold
+      home: MyWidget(),
     );
   }
 }
 
 class Employ {
-  int id;
+  int rollNo;
   String name;
-  bool married;
-  int salary;
-  Employ({this.id, this.name, this.married, this.salary});
-//return type List function ///
-  static List<Employ> getListOfUsers() {
+  int age;
+  Employ({this.rollNo, this.age, this.name});
+
+  static List<Employ> getEmploy() {
     return <Employ>[
-      Employ(id: 2263, name: 'Anikuttan', married: false, salary: 15000),
-      Employ(id: 1029, name: 'Iyappan', married: true, salary: 40000),
-      Employ(id: 1038, name: 'ArunSelvam', married: false, salary: 31000),
-      Employ(id: 1167, name: 'Baskar', married: false, salary: 28000),
+      Employ(rollNo: 1, name: "Ani ", age: 24),
+      Employ(rollNo: 2, name: "kuttan", age: 23),
+      Employ(rollNo: 3, name: "Raju ", age: 45),
+      Employ(rollNo: 4, name: "Iyappan", age: 57),
+      Employ(rollNo: 5, name: "Sabarish ", age: 29),
+      Employ(rollNo: 6, name: "SriniVasan", age: 28),
+      Employ(rollNo: 7, name: "Baskar", age: 24),
+      Employ(rollNo: 8, name: "Selvam", age: 27),
+      Employ(rollNo: 9, name: "Bennani", age: 35),
+      Employ(rollNo: 10, name: "Mani", age: 40),
     ];
   }
 }
@@ -44,69 +39,38 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  // DataColumn() => label
-  // DataRow() => cells:[] => Datacell()
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: DataTable(columns: [
-        DataColumn(
-          label: Text("RollNo"),
-        ), //rollno column
-        DataColumn(
-          label: Text(
-            'Name',
-            style: TextStyle(color: Colors.red),
-          ),
-        ), //namecolumn
-      ], //columns
-          rows: [
-            DataRow(
-              cells: [
-                DataCell(Text('1')), //datacel
-                DataCell(Text('Ani')),
-              ],
-            ), //datarow first line row
-            DataRow(cells: [
-              DataCell(Text('2')), //datace
-              DataCell(Text('Kuttan')),
-            ]),
-          ] //rows
-          ), //tabel
-    ); //center
-  }
-}
-
-class FirstPage extends StatefulWidget {
-  @override
-  _FirstPageState createState() => _FirstPageState();
-}
-
-class _FirstPageState extends State<FirstPage> {
-  List<Employ> users;
-
+  List<Employ> worker;
   @override
   void initState() {
-    //making object on Employ
-    users = Employ.getListOfUsers();
     super.initState();
+
+    worker = Employ.getEmploy();
   }
 
   @override
   Widget build(BuildContext context) {
-    return DataTable(
-      columns: <DataColumn>[
-        DataColumn(
-          label: Text('Id'),
-        ), //datacolumn id
-        DataColumn(label: Text('Name')), //datacolum
-        DataColumn(label: Text('Married ')), //married
-        DataColumn(label: Text('S@lary')),
-      ], //"columns
-      rows: users.map((worker) {
-        return DataRow();
-      }).toList(), //map
+    return Scaffold(
+      appBar: AppBar(title: Text('Data Tabel')),
+      body: Center(
+        child: DataTable(
+          columns: <DataColumn>[
+            DataColumn(label: Text('Roll No'), numeric: true),
+            DataColumn(label: Text('Name')),
+            DataColumn(label: Text('age'), numeric: true)
+          ],
+          rows: worker.map((each) {
+            return DataRow(
+              cells: [
+                DataCell(
+                  Text(each.rollNo.toString()),
+                ),
+                DataCell(Text(each.name)),
+                DataCell(Text(each.age.toString()))
+              ],
+            );
+          }).toList(),
+        ),
+      ),
     );
   }
 }
