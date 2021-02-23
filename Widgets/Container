@@ -99,7 +99,8 @@ class Container3 extends StatelessWidget {
           boxShadow: [
             BoxShadow(
                 color: Colors.red,
-                offset: Offset(25.0, 30.0),
+                offset: Offset(-50.0, -30.0),
+              // offset start from topLeft cornner
                 blurRadius: 10.0,
                 spreadRadius: 5.0),
             BoxShadow(
