@@ -9,7 +9,31 @@ class MyApp extends StatelessWidget {
         home: Scaffold(
             appBar: AppBar(title: Text("Container") //text
                 ), //appbar
-            body: Center(child: Container9() //containers
+            body: Center(
+                child: PageView(children: [
+              Center(
+                child: Container1(),
+              ),
+              Center(
+                child: Container2(),
+              ),
+              Center(
+                child: Container3(),
+              ),
+              Center(
+                child: Container4(),
+              ),
+              Center(
+                child: Container5(),
+              ),
+              Center(
+                child: Container6(),
+              ),
+              Center(
+                child: Container7(),
+              ),
+                 
+            ]) //column
                 ) //center
             ) //scaffold
         ); //materialApp
@@ -28,7 +52,7 @@ class Container1 extends StatelessWidget {
           color: Colors.white,
         ), //textstyle
       ), //text
-      constraints: BoxConstraints.expand(width: 140),
+      constraints: BoxConstraints.expand(width: 50),
       //height: 300,
       //width: 300,
       alignment: Alignment.topRight,
@@ -39,7 +63,7 @@ class Container1 extends StatelessWidget {
   }
 }
 
-class ContainerBorder extends StatelessWidget {
+class Container2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,7 +85,7 @@ class ContainerBorder extends StatelessWidget {
   }
 }
 
-class ContainerShadow extends StatelessWidget {
+class Container3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -90,7 +114,7 @@ class ContainerShadow extends StatelessWidget {
   }
 }
 
-class Container3 extends StatelessWidget {
+class Container4 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -108,7 +132,7 @@ class Container3 extends StatelessWidget {
   }
 }
 
-class Container6 extends StatelessWidget {
+class Container5 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -122,7 +146,7 @@ class Container6 extends StatelessWidget {
   }
 }
 
-class Container7 extends StatelessWidget {
+class Container6 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -133,7 +157,7 @@ class Container7 extends StatelessWidget {
   }
 }
 
-class Container9 extends StatelessWidget {
+class Container7 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
