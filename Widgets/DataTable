@@ -24,7 +24,7 @@ class Employ {
       Employ(rollNo: 3, name: "Raju ", age: 45),
       Employ(rollNo: 4, name: "Iyappan", age: 57),
       Employ(rollNo: 5, name: "Sabarish ", age: 29),
-      Employ(rollNo: 6, name: "SriniVasan", age: 28),
+      Employ(rollNo: 6, name: "SriniVasan", age:28),
       Employ(rollNo: 7, name: "Baskar", age: 24),
       Employ(rollNo: 8, name: "Selvam", age: 27),
       Employ(rollNo: 9, name: "Bennani", age: 35),
@@ -53,6 +53,8 @@ class _MyWidgetState extends State<MyWidget> {
       appBar: AppBar(title: Text('Data Tabel')),
       body: Center(
         child: DataTable(
+          dividerThickness:5,
+        //  dataRowHeight:100,
           columns: <DataColumn>[
             DataColumn(label: Text('Roll No'), numeric: true),
             DataColumn(label: Text('Name')),
@@ -62,10 +64,10 @@ class _MyWidgetState extends State<MyWidget> {
             return DataRow(
               cells: [
                 DataCell(
-                  Text(each.rollNo.toString()),
+                  Text('${each.rollNo}'),
                 ),
                 DataCell(Text(each.name)),
-                DataCell(Text(each.age.toString()))
+                DataCell(Text('${each.age}') ),
               ],
             );
           }).toList(),
