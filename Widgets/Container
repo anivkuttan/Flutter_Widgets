@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
               Center(
                 child: Container7(),
               ),
-                 
+              Container8(),
             ]) //column
                 ) //center
             ) //scaffold
@@ -193,21 +193,27 @@ class Container8 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
-    //  appBar: AppBar(
-     //   title: Text("AppBar"),
-   //   ), //appba
+      //  appBar: AppBar(
+      //   title: Text("AppBar"),
+      //   ), //appba
       body: Center(
         child: Container(
           height: 100, width: 170, child: Icon(Icons.android, size: 50),
           decoration: BoxDecoration(
             color: Colors.grey[300],
             borderRadius: BorderRadius.all(Radius.circular(30)), //radius
-            boxShadow :[
-BoxShadow(color:Colors.grey, offset:Offset(5
-                                           ,5), blurRadius:5.0 , spreadRadius:4.0 ), 
-              BoxShadow(color:Colors.white,offset:Offset(-3,-3), 
-                       spreadRadius:1.0,blurRadius:7.0) 
-            ] , //shadow
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey,
+                  offset: Offset(5, 5),
+                  blurRadius: 5.0,
+                  spreadRadius: 4.0),
+              BoxShadow(
+                  color: Colors.white,
+                  offset: Offset(-3, -3),
+                  spreadRadius: 1.0,
+                  blurRadius: 7.0)
+            ], //shadow
           ), //decoration
         ), //container
       ), //center
