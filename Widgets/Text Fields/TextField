@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: MyWidget(),
-        ),
-      ),
+      home: MyWidget(),
     );
   }
 }
@@ -24,25 +17,27 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  TextEditingController nameController = TextEditingController();
-
-  String fullName = '';
-  bool isPasswordVisible = true;
-
+  String _text = 'Unknown';
+  bool isHidden = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("TextField"),
-      ), //appbar
-      body: Padding(
-        padding: EdgeInsets.all(38.0),
-        child: ListView(
-          children: <Widget>[
-            Text(fullName), //text
+        title: Text('Text Field'),
+      ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              _text,
+              style: TextStyle(fontSize: 28, color: Colors.blue),
+            ),
             TextField(
               decoration: InputDecoration(
                 helperText: "Enter some thing",
+                //icon parameter shows icons on outside of th field(front)
                 icon: Icon(Icons.print),
               ), //decoration
               textAlign: TextAlign.center,
@@ -54,33 +49,33 @@ class _MyWidgetState extends State<MyWidget> {
               cursorWidth: 7,
               maxLength: 8, //maxLines:3,
               keyboardType: TextInputType.emailAddress,
-              controller: nameController,
+
               onChanged: (text) {
                 setState(() {
-                  fullName = text;
+                  _text = text;
                 });
               },
-            ), //textfield
-            SizedBox(height: 20),
+            ),
             TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: "Full Name",
                 hintText: "Enter your full Name",
-              ), //decoration
-            ), //textfield
+              ), //Inputdecoration
+            ),
             TextField(
-              // autofocus: true, //automatically cursor open in this text field
+              autofocus: true, //automatically cursor open in this text field
               decoration: InputDecoration(
+                // prefixicon shows inside of the field
                 prefixIcon: Icon(Icons.save),
                 labelText: "This is Label text",
-                hintText: "This is hint text",
+                hintText:
+                    "This is hint text & Auto focus on So cursser on first tis field ",
                 hintStyle: TextStyle(
                   color: Colors.purple,
                 ), //textstyle
               ), //input
-            ), //tf
-            SizedBox(height: 25),
+            ),
             TextField(
               enabled: false, //true make it normal
               decoration: InputDecoration(
@@ -94,11 +89,9 @@ class _MyWidgetState extends State<MyWidget> {
                   borderRadius: BorderRadius.circular(30),
                 ), //inputborder
               ), //decoration
-            ), //tf
-            SizedBox(height: 25),
+            ),
             TextField(
               enabled: true,
-
               decoration: InputDecoration(
                 //labelText: "Round text",
                 hintText: "Enter hear",
@@ -109,3 +102,65 @@ class _MyWidgetState extends State<MyWidget> {
                     color: Colors.green,
                   ), //borderside
                 ), //border
+              ),
+            ),
+            TextField(
+              obscureText: isHidden,
+              decoration: InputDecoration(
+                  labelText: 'obscure text : true',
+                  border: OutlineInputBorder(),
+                  suffixIcon: IconButton(
+                      icon: Icon(
+                          isHidden ? Icons.visibility_off : Icons.visibility),
+                      onPressed: () {
+                        setState(() {
+                          isHidden = !isHidden;
+                        });
+                      })),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+// InputDecoration({Widget icon, 
+// String labelText, 
+// TextStyle labelStyle, 
+// String helperText, 
+// TextStyle helperStyle, 
+// int helperMaxLines, 
+// String hintText, 
+// TextStyle hintStyle, 
+// TextDirection hintTextDirection, 
+// int hintMaxLines,
+// String errorText, 
+// TextStyle errorStyle, 
+// int errorMaxLines,
+// bool hasFloatingPlaceholder = true, 
+// FloatingLabelBehavior floatingLabelBehavior,
+// bool isCollapsed = false, 
+// bool isDense, 
+// EdgeInsetsGeometry contentPadding, 
+// Widget prefixIcon, 
+// BoxConstraints prefixIconConstraints,
+// Widget prefix,
+// String prefixText, 
+// TextStyle prefixStyle,
+// Widget suffixIcon,
+// Widget suffix, String suffixText, 
+// TextStyle suffixStyle, 
+// BoxConstraints suffixIconConstraints,
+// Widget counter, String counterText,
+// TextStyle counterStyle, bool filled,
+// Color fillColor, Color focusColor,
+// Color hoverColor, 
+// InputBorder errorBorder,
+// InputBorder focusedBorder, 
+// InputBorder focusedErrorBorder,
+// InputBorder disabledBorder,
+// InputBorder enabledBorder, 
+// InputBorder border,
+// bool enabled = true,
