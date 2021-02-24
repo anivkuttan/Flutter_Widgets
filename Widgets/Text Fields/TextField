@@ -143,6 +143,8 @@ class _MyWidgetState extends State<MyWidget> {
               decoration: InputDecoration.collapsed(hintText: "hello"),
             ), //tf
             SizedBox(height: 25),
+MyWidget(), 
+SizedBox(height:25), 
             Container(
               padding: EdgeInsets.all(14),
               decoration: BoxDecoration(
@@ -162,3 +164,42 @@ class _MyWidgetState extends State<MyWidget> {
     );
   }
 }
+
+
+
+
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  bool isPasswordVisible = true;
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 50),
+          child: TextField(
+            obscureText:isPasswordVisible, 
+              decoration: InputDecoration(
+            labelText: 'Label Text',
+            hintText: 'HintText',
+                suffixIcon:IconButton(icon:Icon(isPasswordVisible? Icons. visibility_off:Icons.visibility), onPressed:() {
+setState((){
+isPasswordVisible = !isPasswordVisible ;
+});
+                } ) , 
+                icon: Icon(Icons.people),
+            border: OutlineInputBorder(),
+          ) //decoration
+              ), //textField
+        ),
+      ), //center
+    );
+  }
+}
+
+
+
+
