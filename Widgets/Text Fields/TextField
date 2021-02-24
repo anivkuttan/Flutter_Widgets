@@ -36,6 +36,9 @@ class _MyWidgetState extends State<MyWidget> {
             ),
             TextField(
               decoration: InputDecoration(
+                floatingLabelBehavior:
+                    FloatingLabelBehavior.always, //never-label text hide
+                labelText: 'Labeltext always hear no moving',
                 helperText: "Enter some thing",
                 //icon parameter shows icons on outside of th field(front)
                 icon: Icon(Icons.print),
@@ -58,6 +61,8 @@ class _MyWidgetState extends State<MyWidget> {
             ),
             TextField(
               decoration: InputDecoration(
+                counter: ElevatedButton(
+                    onPressed: () {}, child: Text('Counter widget')),
                 border: OutlineInputBorder(),
                 labelText: "Full Name",
                 hintText: "Enter your full Name",
@@ -117,6 +122,16 @@ class _MyWidgetState extends State<MyWidget> {
                           isHidden = !isHidden;
                         });
                       })),
+            ),
+            TextField(
+              obscuringCharacter: '&',
+              obscureText: true,
+              decoration: InputDecoration(
+                  filled: true,
+                  counterText: 'Counter Text allways hear',
+                  fillColor: Colors.yellow,
+                  prefixText: 'Hello ',
+                  hintText: 'obscuringCharacter: &'),
             ),
           ],
         ),
