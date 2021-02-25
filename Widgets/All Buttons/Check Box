@@ -1,113 +1,80 @@
 import 'package:flutter/material.dart';
 
-
-
 void main() => runApp(MyApp());
 
-
-
 class MyApp extends StatelessWidget {
-
-
-
   @override
-
-
-
   Widget build(BuildContext context) {
-
-
-
     return MaterialApp(
-
-
-
       home: Scaffold(
-
-
-
         body: MyWidgetClass(),
-
-
-
       ), //scaffold
-
-
-
     );
-
-
-
   }
-
-
-
 }
-
-
 
 class MyWidgetClass extends StatefulWidget {
-
-
-
   @override
-
-
-
   _MyWidgetClassState createState() => _MyWidgetClassState();
-
-
-
 }
 
-
-
 class _MyWidgetClassState extends State<MyWidgetClass> {
-
   bool _isChecked = false;
+  bool _ischecked = true;
+  bool monday = false;
+  bool tuesday = false;
+  bool wednesday = false;
 
-  @override
-
-
-
-  Widget build(BuildContext context) {
-
-
-
-    return Row(
-
-
-
-      mainAxisAlignment: MainAxisAlignment.center,
-
-
-
-      children: <Widget>[
-
-        Checkbox(
-
-          value:_isChecked,
-
-onChanged:(value){
-
-  setState((){
-
-    _isChecked = !_isChecked;
-
-  });
-
-},),//checkbox
-
-      ],
-
-
-
-    );
-
-
-
+  Widget checkbox(bool _value, String day) {
+    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      Text(day),
+      Checkbox(
+          value: _value,
+          onChanged: (value) {
+            setState(() {
+              switch (day) {
+                case "mon":
+                  monday = value;
+                  break;
+                case "tues":
+                  tuesday = value;
+                  break;
+                case "wed":
+                  wednesday = value;
+                  break;
+              }
+            });
+          }), //chekbox
+    ] //children
+        ); //column
   }
 
-
-
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Checkbox(
+          value: _isChecked,
+          onChanged: (value) {
+            setState(() {
+              _isChecked = !_isChecked;
+            });
+          },
+        ), //checkbox
+        Checkbox(
+            value: _ischecked,
+            activeColor: Colors.yellow,
+            checkColor: Colors.purple,
+            onChanged: (value) {
+              setState(() {
+                _ischecked = !_ischecked;
+              });
+            }), //checkbox
+        checkbox(monday, "mon"),
+        checkbox(tuesday, "tues"),
+        checkbox(wednesday, "wed"),
+      ],
+    );
+  }
 }
