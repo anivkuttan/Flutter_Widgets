@@ -17,78 +17,105 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  bool hidePassword = true;
-  String email;
-  String password;
-  final GlobalKey<FormState> _formKey =GlobalKey<FormState>() ;
+  final _formKey = GlobalKey<FormState>();
+  bool isPasswordHidden = true;
+  String userEmail;
+  String userPassword;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("AppBar"),
-      ), //appba
-      body: Form(
-        key:_formKey, 
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Text(email),
-          Text(password), 
-          Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-              child: TextFormField(validator:(String value) {if(value. isEmpty) {
-return 'UserName Must be filled' ;
-              } 
-                                                             return null;}, 
-       /*onSaved:(value ) {
-return email = value;
-             }, */
-                                   decoration: InputDecoration(
-                    border: OutlineInputBorder(), labelText: "User Name"),
-              ) //usertextfield
-              ), //padding
-
-          //---------------password--------------------//
-          Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-              child: TextFormField(
-                //autoValitateMode:AutovalidateMode.always,
-             //   onSaved:(value) {return password =value;}, 
-                validator: (String value) {
-                  if (value.isEmpty) {
-                    return 'Password Mustbe filled';
-                  } else if (value.length <= 4) {
-                    return 'Password must Contain minimum 4 characters ';
-                  }
-
-                  return null;
-                },
-                obscureText: hidePassword,
-                decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                      icon: Icon(hidePassword
-                          ? Icons.visibility_off
-                          : Icons.visibility),
-                      onPressed: () {
-                        setState(() {
-                          hidePassword = !hidePassword;
-                        });
-                      }), //iconbutton
-                  border: OutlineInputBorder(),
-
-                  labelText: "Password",
-                  hintText: "Enter Your Password",
+      appBar: AppBar(title: Text('Text Form Field')),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 30),
+        child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('email:$userEmail'),
+                SizedBox(height: 20),
+                Text('password : $userPassword'),
+                SizedBox(height: 20),
+                TextFormField(
+                  // autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (String value) {
+                    if (value.isEmpty) {
+                      return "Enter Your Name";
+                    } else if (value.length < 4) {
+                      return 'Name Should be 4 leaters';
+                    }
+                    return null;
+                  },
+                  onSaved: (String value) {
+                    setState(() {
+                      userEmail = value;
+                    });
+                  },
+                  decoration: InputDecoration(
+                    labelText: 'User Name',
+                    hintText: 'Enter Your Full Name',
+                    prefixIcon: Icon(Icons.people),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.horizontal(
+                        left: Radius.circular(10),
+                        right: Radius.circular(10),
+                      ),
+                    ),
+                  ),
                 ),
-              ) //textfield
-              ), //padding
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 50, vertical: 30),
-            child: ElevatedButton(
-                child: Text('Submit'), onPressed: () {
-_formKey.currentState.validate();
-                  _formKey.currentState.save() ;
-                }), //button
-          ), //padding
-        ]), //column
-      ), //form
+                SizedBox(height: 30),
+                TextFormField(
+                  obscureText: isPasswordHidden,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (String value) {
+                    if (value.isEmpty) {
+                      return "Enter Your Password";
+                    } else if (value.length > 8) {
+                      return 'maximum 8';
+                    }
+                    return null;
+                  },
+                  onSaved: (String value) {
+                    setState(() {
+                      userPassword = value;
+                    });
+                  },
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    hintText: 'Enter Your Password',
+                    prefixIcon: Icon(Icons.lock),
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            isPasswordHidden = !isPasswordHidden;
+                          });
+                        },
+                        icon: Icon(isPasswordHidden
+                            ? Icons.visibility_off_outlined
+                            : Icons.visibility)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.horizontal(
+                        left: Radius.circular(10),
+                        right: Radius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          final form = _formKey.currentState;
+          if (form.validate()) {
+            // now field text validated
+            form.save(); //it call onSaved parameter(function)
+          }
+
+          _formKey.currentState.validate();
+        },
+        child: Icon(Icons.done),
+      ),
     );
   }
 }
