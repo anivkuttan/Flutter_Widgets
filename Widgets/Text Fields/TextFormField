@@ -17,7 +17,8 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
- GlobalKey<FormState> formkey = GlobalKey<FormState>() ;
+  bool hidePassword = true;
+  final GlobalKey<FormState> _formKey =GlobalKey<FormState>() ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,35 +26,60 @@ class _MyWidgetState extends State<MyWidget> {
         title: Text("AppBar"),
       ), //appba
       body: Form(
-        key:formkey, 
-        child: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            TextFormField(
-              
-              validator: (String value) {
-                if (value.isEmpty) {
-                  return 'Text Requeard';
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                hintText: 'Hint',
-                labelText: 'Label Text',
-                border: OutlineInputBorder(),
-              ), //decoration
-            ), //field
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              child: ElevatedButton(
-                onPressed: () {
-formkey.currentState.validate() ;
+        key:_formKey, 
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+              child: TextFormField(validator:(String value) {if(value. isEmpty) {
+return 'UserName Must be filled' ;
+              } 
+                                                             return null;}, 
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(), labelText: "User Name"),
+              ) //usertextfield
+              ), //padding
+
+          //---------------password--------------------//
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+              child: TextFormField(
+                //autoValitateMode:AutovalidateMode.always,
+                validator: (String value) {
+                  if (value.isEmpty) {
+                    return 'Password Mustbe filled';
+                  } else if (value.length <= 4) {
+                    return 'Password must Contain minimum 4 characters ';
+                  }
+
+                  return null;
                 },
-                child: Text('Submit'),
-              ),
-            ),
-          ]), //column
-        ), //form
-      ), //center
-    ); //scacfold
+                obscureText: hidePassword,
+                decoration: InputDecoration(
+                  suffixIcon: IconButton(
+                      icon: Icon(hidePassword
+                          ? Icons.visibility_off
+                          : Icons.visibility),
+                      onPressed: () {
+                        setState(() {
+                          hidePassword = !hidePassword;
+                        });
+                      }), //iconbutton
+                  border: OutlineInputBorder(),
+
+                  labelText: "Password",
+                  hintText: "Enter Your Password",
+                ),
+              ) //textfield
+              ), //padding
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 50, vertical: 30),
+            child: ElevatedButton(
+                child: Text('Submit'), onPressed: () {
+_formKey.currentState.validate();
+                }), //button
+          ), //padding
+        ]), //column
+      ), //form
+    );
   }
 }
