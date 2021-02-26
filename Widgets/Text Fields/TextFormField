@@ -18,6 +18,8 @@ class MyWidget extends StatefulWidget {
 
 class _MyWidgetState extends State<MyWidget> {
   bool hidePassword = true;
+  String email;
+  String password;
   final GlobalKey<FormState> _formKey =GlobalKey<FormState>() ;
   @override
   Widget build(BuildContext context) {
@@ -28,13 +30,18 @@ class _MyWidgetState extends State<MyWidget> {
       body: Form(
         key:_formKey, 
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Text(email),
+          Text(password), 
           Padding(
               padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
               child: TextFormField(validator:(String value) {if(value. isEmpty) {
 return 'UserName Must be filled' ;
               } 
                                                              return null;}, 
-                decoration: InputDecoration(
+       /*onSaved:(value ) {
+return email = value;
+             }, */
+                                   decoration: InputDecoration(
                     border: OutlineInputBorder(), labelText: "User Name"),
               ) //usertextfield
               ), //padding
@@ -44,6 +51,7 @@ return 'UserName Must be filled' ;
               padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
               child: TextFormField(
                 //autoValitateMode:AutovalidateMode.always,
+             //   onSaved:(value) {return password =value;}, 
                 validator: (String value) {
                   if (value.isEmpty) {
                     return 'Password Mustbe filled';
@@ -76,6 +84,7 @@ return 'UserName Must be filled' ;
             child: ElevatedButton(
                 child: Text('Submit'), onPressed: () {
 _formKey.currentState.validate();
+                  _formKey.currentState.save() ;
                 }), //button
           ), //padding
         ]), //column
