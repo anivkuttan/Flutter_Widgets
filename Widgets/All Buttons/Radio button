@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyWidget(),
+    );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  int groupValue = 0;
+  int group = 1;
+  String groupString = '';
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("AppBar"),
+      ), //appba
+      body: Center(
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Radio<int>(
+              value: 1,
+              groupValue: groupValue,
+              onChanged: (value) {
+                setState(() {
+                  groupValue = value;
+                });
+              }), //radio
+          Radio<int>(
+              value: 2,
+              groupValue: groupValue,
+              onChanged: (value) {
+                setState(() {
+                  groupValue = value;
+                });
+              }), //radio
+          Radio<String>(
+              value: 'One',
+              groupValue: groupString,
+              onChanged: (value) {
+                setState(() {
+                  groupString = value;
+                });
+              }),
+          Radio<String>(
+              value: 'Two',
+              groupValue: groupString,
+              onChanged: (value) {
+                setState(() {
+                  groupString = value;
+                });
+              }), //raxio
+        ]), //column
+      ), //center
+    );
+  }
+}
