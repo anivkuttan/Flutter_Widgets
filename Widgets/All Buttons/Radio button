@@ -31,6 +31,7 @@ class _MyWidgetState extends State<MyWidget> {
           Radio<int>(
               value: 1,
               groupValue: groupValue,
+            activeColor:Colors.purple,
               onChanged: (value) {
                 setState(() {
                   groupValue = value;
@@ -38,6 +39,7 @@ class _MyWidgetState extends State<MyWidget> {
               }), //radio
           Radio<int>(
               value: 2,
+            activeColor:Colors.purple,
               groupValue: groupValue,
               onChanged: (value) {
                 setState(() {
@@ -60,6 +62,13 @@ class _MyWidgetState extends State<MyWidget> {
                   groupString = value;
                 });
               }), //raxio
+          ListTile(title:Text('Radio List Tile' ),leading:Radio<int>(value:3,
+                                                                     activeColor:Colors. purple, groupValue:groupValue, onChanged:(value) {
+setState(() {
+groupValue = value;
+} ) ;
+          } ),//radio
+                  ), //tile
         ]), //column
       ), //center
     );
