@@ -1,0 +1,61 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyWidget(),
+    );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> with TickerProviderStateMixin {
+  AnimationController controller;
+  Animation<double> animation;
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+        vsync: this,
+        duration: Duration(milliseconds: 400),
+        lowerBound: 0.8,
+        upperBound: 1)
+      ..repeat();
+    // lowerBound is lower value
+    // upperBound is higher value
+    // if you using Tween then no need of this
+    // controller.repeat();
+    // this line useed like =>  ..repeat();
+    animation = CurvedAnimation(parent: controller, curve: Curves.bounceInOut);
+    //Tween<double>(begin: 0.0, end: 1).animate(controller);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("AppBar"),
+        ), //appbar
+        body: Center(
+          child: ScaleTransition(
+            scale: animation,
+            child: Container(
+              height: 200,
+              width: 200,
+              decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius:
+                      BorderRadius.all(Radius.circular(20))), //decoration
+            ), //child container
+          ), //tranisitoion
+        ) //center
+        );
+  }
+}
