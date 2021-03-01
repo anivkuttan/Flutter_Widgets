@@ -21,13 +21,18 @@ class MyWidget extends StatefulWidget {
   _MyWidgetState createState() => _MyWidgetState();
 }
 
-class _MyWidgetState extends State<MyWidget>
-    with SingleTickerProviderStateMixin {
+class _MyWidgetState extends State<MyWidget> with TickerProviderStateMixin {
   AnimationController controller;
+  AnimationController sizeController;
+  Animation<double> sizeAnimation;
   Animation<double> animation;
+  AnimationController sliderController;
+  Animation<Offset> sliderAnimation;
+
   @override
   void initState() {
     super.initState();
+    //-------------Scale Trainsition--------------//
     controller = AnimationController(
         vsync: this,
         duration: Duration(milliseconds: 400),
@@ -41,6 +46,23 @@ class _MyWidgetState extends State<MyWidget>
     // this line useed like =>  ..repeat();
     animation = CurvedAnimation(parent: controller, curve: Curves.bounceInOut);
     //Tween<double>(begin: 0.0, end: 1).animate(controller);
+    //--------------Size Transition------------//
+    sizeController =
+        AnimationController(vsync: this, duration: Duration(seconds: 2))
+          ..repeat();
+    sizeAnimation =
+        CurvedAnimation(parent: sizeController, curve: Curves.linear);
+
+//----------slider Transition--------------//
+    sliderController =
+        AnimationController(vsync: this, duration: Duration(seconds: 2))..repeat(reverse:true) ;
+        //  ..repeat(reverse: true);
+    sliderAnimation = Tween<Offset>(
+      //begin child position
+      //end  child moveing positions
+      begin: Offset(0,0) , end: Offset(2, 0))
+        .animate(
+            CurvedAnimation(parent: sliderController, curve: Curves.elasticIn));
   }
 
   @override
@@ -52,20 +74,32 @@ class _MyWidgetState extends State<MyWidget>
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: ScaleTransition(
-        // alignment :Alignment(0.1,0.5),
-        scale: animation,
-        child: Container(
-          height: 200,
-          width: 200,
-          decoration: BoxDecoration(
-            color: Colors.red,
-            borderRadius: BorderRadius.all(
-              Radius.circular(20),
+      child: Column(children: [
+        SlideTransition(
+            position: sliderAnimation, child: FlutterLogo(size: 200)),
+        SizedBox(height: 200),
+        ScaleTransition(
+          // alignment :Alignment(0.1,0.5),
+          scale: animation,
+          child: Container(
+            height: 200,
+            width: 200,
+            decoration: BoxDecoration(
+              color: Colors.red,
+              borderRadius: BorderRadius.all(
+                Radius.circular(20),
+              ), //radius
             ), //decoration
           ), //child container
-        ), //tranisitoion
-      ),
+        ), //transition
+        SizedBox(height: 200),
+        SizeTransition(
+          sizeFactor: sizeAnimation,
+          axis: Axis.horizontal,
+          axisAlignment: -1,
+          child: FlutterLogo(size: 200),
+        ), //sizeTransition
+      ]), //column
     ); //center
   }
 }
@@ -133,7 +167,7 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
           SizedBox(height: 200),
           RotationTransition(
             turns: rotationAnimation,
-            alignment: Alignment(1, 1),
+            alignment: Alignment(0, 0),
             child: Container(
               height: 200,
               width: 200,
