@@ -6,8 +6,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyWidget(),
-    );
+        home: Scaffold(
+            appBar: AppBar(title: Text('Transision')), //appbar
+            body: PageView(children: [
+              MyWidget(),
+              FirstPage(),
+            ]) //pageview
+            ));
   }
 }
 
@@ -16,7 +21,8 @@ class MyWidget extends StatefulWidget {
   _MyWidgetState createState() => _MyWidgetState();
 }
 
-class _MyWidgetState extends State<MyWidget> with TickerProviderStateMixin {
+class _MyWidgetState extends State<MyWidget>
+    with SingleTickerProviderStateMixin {
   AnimationController controller;
   Animation<double> animation;
   @override
@@ -38,24 +44,81 @@ class _MyWidgetState extends State<MyWidget> with TickerProviderStateMixin {
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("AppBar"),
-        ), //appbar
-        body: Center(
-          child: ScaleTransition(
-            scale: animation,
+    return Center(
+      child: ScaleTransition(
+        // alignment :Alignment(0.1,0.5),
+        scale: animation,
+        child: Container(
+          height: 200,
+          width: 200,
+          decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.all(
+              Radius.circular(20),
+            ), //decoration
+          ), //child container
+        ), //tranisitoion
+      ),
+    ); //center
+  }
+}
+
+class FirstPage extends StatefulWidget {
+  @override
+  _FirstPageState createState() => _FirstPageState();
+}
+
+class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
+  AnimationController rotationController;
+  Animation<double> rotationAnimation;
+  AnimationController fadeController;
+  Animation<double> fadeAnimation;
+  @override
+  void initState() {
+    super.initState();
+    //-----------Rotation-------------------//
+    rotationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+      //lowerBound :0,
+      // upperBound :0.8,
+      //value:1,
+    )..repeat();
+    rotationAnimation =
+        CurvedAnimation(parent: rotationController, curve: Curves.linear);
+//----------------Fade Animation---------------//
+    fadeController =
+        AnimationController(vsync: this, duration: Duration(seconds:3))
+          ..repeat();
+    fadeAnimation =
+        CurvedAnimation(parent: fadeController, curve: Curves.linear);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          FadeTransition(opacity:fadeAnimation, child:Text('Anikuttan', style:TextStyle(fontSize:70,fontWeight:FontWeight.bold)  ) ), //fadd
+          SizedBox(height: 200),
+          RotationTransition(
+            turns: rotationAnimation,
+            alignment: Alignment(1, 1),
             child: Container(
               height: 200,
               width: 200,
-              decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius:
-                      BorderRadius.all(Radius.circular(20))), //decoration
-            ), //child container
-          ), //tranisitoion
-        ) //center
-        );
+              color: Colors.purple,
+            ), //container
+          ) //rotation
+        ],
+      ), //column
+    ); //center
   }
 }
