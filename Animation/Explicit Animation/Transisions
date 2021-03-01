@@ -90,15 +90,34 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
       //lowerBound :0,
       // upperBound :0.8,
       //value:1,
-    )..repeat();
+    )..forward();
     rotationAnimation =
         CurvedAnimation(parent: rotationController, curve: Curves.linear);
+    rotationAnimation.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        rotationController.reverse();
+      } else if (status == AnimationStatus.dismissed) {
+        rotationController.forward();
+      }
+    });
+
 //----------------Fade Animation---------------//
-    fadeController =
-        AnimationController(vsync: this, duration: Duration(seconds:3))
-          ..repeat();
+    fadeController = AnimationController(
+        vsync: this,
+        duration: Duration(seconds: 3),
+        value: 0,
+        lowerBound: 0,
+        upperBound: 1)
+      ..repeat();
     fadeAnimation =
-        CurvedAnimation(parent: fadeController, curve: Curves.linear);
+        CurvedAnimation(parent: fadeController, curve: Curves.fastOutSlowIn);
+  }
+
+  @override
+  void dispose() {
+    rotationController.dispose();
+    fadeController.dispose();
+    super.dispose();
   }
 
   @override
@@ -106,7 +125,11 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
     return Center(
       child: Column(
         children: [
-          FadeTransition(opacity:fadeAnimation, child:Text('Anikuttan', style:TextStyle(fontSize:70,fontWeight:FontWeight.bold)  ) ), //fadd
+          FadeTransition(
+              opacity: fadeAnimation,
+              child: Text('Anikuttan',
+                  style: TextStyle(
+                      fontSize: 70, fontWeight: FontWeight.bold))), //fadd
           SizedBox(height: 200),
           RotationTransition(
             turns: rotationAnimation,
