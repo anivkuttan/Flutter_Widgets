@@ -1,0 +1,81 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Animated List'),
+        ), //appbar
+        body: PageView(
+          children: [
+            MyWidget1(),
+          ],
+        ), //pageView
+        floatingActionButton: Row(
+          mainAxisSize: MainAxisSize.min, //to avoid extra spaces
+          children: [
+            FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () {},
+            ),
+            FloatingActionButton(
+              child: Icon(Icons.close),
+              onPressed: () {},
+            )
+          ],
+        ),
+      ), //scaffold
+    ); //materialApp
+  }
+}
+
+class MyWidget1 extends StatefulWidget {
+  @override
+  _MyWidget1State createState() => _MyWidget1State();
+}
+
+class _MyWidget1State extends State<MyWidget1> {
+  GlobalKey<AnimatedListState> _listKey = GlobalKey();
+  List<String> _nameList = [
+    'Anikuttan 1',
+    'Anikuttan 2',
+    'Anikuttan 3',
+    'Anikuttan 4',
+    'Anikuttan 5',
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 80, vertical: 10),
+      child: AnimatedList(
+        key: _listKey,
+        initialItemCount: _nameList.length,
+        scrollDirection: Axis.vertical,
+        itemBuilder: (context, index, animation) {
+          return _leftToRigth(
+              context, index, animation); //to return a custom function
+        },
+      ),
+    );
+  }
+
+  Widget _leftToRigth(BuildContext context, int index, Animation animation) {
+    Animation _animationValues = Tween<Offset>(
+      begin: Offset(-1, 0),
+      end: Offset(0, 0),
+    ).animate(animation);
+    return SlideTransition(
+      position: _animationValues,
+      child: SizedBox(
+        height: 50,
+        child: ListTile(
+          title: Text('$_nameList[index]'),
+        ),
+      ),
+    );
+  }
+}
