@@ -17,59 +17,62 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  final GlobalKey<AnimatedListState> _key = GlobalKey<AnimatedListState>();
-  List<String> list = [
-    'Ani 1',
-    'Ani 2',
-    'Ani 3',
-    'Ani 4',
-  ];
-
+  final GlobalKey<AnimatedListState> key = GlobalKey();
+  List<String> list = ["Ani kuttan 1", "Ani kuttan 2", "Ani kuttan 3"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.add),
-            onPressed: () {
-              _addItem();
-            }),
         appBar: AppBar(
           title: Text("AppBar"),
-          leading:IconButton(icon:Icon(Icons. add), onPressed:() {_addItem() ;}  ), 
+          leading: IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                addItem();
+              }), //button
         ), //appbar
         body: Center(
           child: AnimatedList(
-            key: _key,
-            initialItemCount: list.length,
-            scrollDirection: Axis.vertical,
-            itemBuilder: (context, index, animation) {
-              return SlideTransition(
-                position: Tween<Offset>(begin: Offset(-1, 0), end: Offset(0, 0))
-                    .animate(animation),
-                child: Card(
-                  elevation: 2,
-                  child: ListTile(
-                    title: Text(list[index]),
-                    subtitle: Text('its All genarated'),
-                    leading: CircleAvatar(backgroundColor: Colors.orange),
-                    trailing: IconButton(
-                        icon: Icon(Icons.close, color: Colors.red),
-                        onPressed: () {}),
-                  ), //tile
-                ), //card
-              ); //trasition
-            }, //builder
-          ), //list
+              key: key,
+              initialItemCount: list.length,
+              itemBuilder: (context, index, animation) {
+                return animatedList(context, index, animation);
+              }), //list
         ) //center
-        );
+        ); //scaffold
   }
 
-  _addItem() {
-    // line one add a item to normal String list
-    // like => list.insert(index,String);
-  // final int index = list.length -1 ;
-    list.insert(0, 'Ani ${list.length + 1} ');
-    
-    _key.currentState.insertItem(0, duration:Duration(milliseconds:900) );
+  addItem() {
+    //format
+    // inset to normal list
+    // key.currentState.insertItem(index,duration);
+    final int i = list.length; //create a variable
+    list.insert(i, "Ani kuttan${list.length + 1}");
+    key.currentState.insertItem(i, duration: Duration(seconds: 1));
+  }
+
+  removeItem(int i) {
+    list.removeAt(i);
+    final AnimatedListRemovedItemBuilder builder = (context, animation) {
+     
+      return animatedList(context, i, animation);
+    };
+    key. currentState.removeItem(i,builder, duration:Duration(seconds:1) );
+  }
+
+  Widget animatedList(
+      BuildContext context, int index, Animation<double> animation) {
+    return SlideTransition(
+      position: Tween<Offset>(begin: Offset(-1, 0), end: Offset.zero)
+          .animate(animation),
+      child: ListTile(
+        title: Text(list[index]),
+        leading: CircleAvatar(backgroundColor: Colors.orange), //avatar
+        trailing: IconButton(
+            icon: Icon(Icons.close, color: Colors.red),
+            onPressed: () {
+              removeItem(index);
+            }), //button
+      ), //tile
+    ); //transition
   }
 }
