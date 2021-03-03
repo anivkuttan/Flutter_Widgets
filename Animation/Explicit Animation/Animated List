@@ -17,37 +17,59 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  final GlobalKey<AnimatedListState> _key = GlobalKey() ;
-  List<String> nameList = [
-'Anikuttan',
-    'Iyappan',
-    'ArunSelvam',
-    'Baskar',
-    'Sabarish', 
-  ] ;
+  final GlobalKey<AnimatedListState> _key = GlobalKey<AnimatedListState>();
+  List<String> list = [
+    'Ani 1',
+    'Ani 2',
+    'Ani 3',
+    'Ani 4',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: () {
+              _addItem();
+            }),
         appBar: AppBar(
           title: Text("AppBar"),
+          leading:IconButton(icon:Icon(Icons. add), onPressed:() {_addItem() ;}  ), 
         ), //appbar
         body: Center(
-    child:AnimatedList(
-    key:_key ,
-      initialItemCount:nameList.length, 
-      scrollDirection :Axis.vertical,
-     itemBuilder:(context, index, animation) {
-return _itembuilder(context, nameList[index],animation) ;
-     }, 
-    ), //list
-    ) , //center
+          child: AnimatedList(
+            key: _key,
+            initialItemCount: list.length,
+            scrollDirection: Axis.vertical,
+            itemBuilder: (context, index, animation) {
+              return SlideTransition(
+                position: Tween<Offset>(begin: Offset(-1, 0), end: Offset(0, 0))
+                    .animate(animation),
+                child: Card(
+                  elevation: 2,
+                  child: ListTile(
+                    title: Text(list[index]),
+                    subtitle: Text('its All genarated'),
+                    leading: CircleAvatar(backgroundColor: Colors.orange),
+                    trailing: IconButton(
+                        icon: Icon(Icons.close, color: Colors.red),
+                        onPressed: () {}),
+                  ), //tile
+                ), //card
+              ); //trasition
+            }, //builder
+          ), //list
+        ) //center
         );
   }
-  Widget _itembuilder(BuildContext context, String name, Animation<double> animation ) {
-return SizeTransition(
-sizeFactor:animation,
-child:Card(elevation:2, child:ListTile(title :Text('$name' ) ) //tite
-          ),//c@rd
-) ;
-  } 
+
+  _addItem() {
+    // line one add a item to normal String list
+    // like => list.insert(index,String);
+  // final int index = list.length -1 ;
+    list.insert(0, 'Ani ${list.length + 1} ');
+    
+    _key.currentState.insertItem(0, duration:Duration(milliseconds:900) );
+  }
 }
