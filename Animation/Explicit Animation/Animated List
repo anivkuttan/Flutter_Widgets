@@ -6,7 +6,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyWidget(),
+      home: PageView(
+      children:[
+MyWidget (), 
+        FirstPage (), 
+      ] ), 
     );
   }
 }
@@ -51,12 +55,13 @@ class _MyWidgetState extends State<MyWidget> {
   }
 
   removeItem(int i) {
-    list.removeAt(i);
+    
     final AnimatedListRemovedItemBuilder builder = (context, animation) {
      
       return animatedList(context, i, animation);
     };
     key. currentState.removeItem(i,builder, duration:Duration(seconds:1) );
+    list. removeAt(i) ;
   }
 
   Widget animatedList(
@@ -64,7 +69,7 @@ class _MyWidgetState extends State<MyWidget> {
     return SlideTransition(
       position: Tween<Offset>(begin: Offset(-1, 0), end: Offset.zero)
           .animate(animation),
-      child: ListTile(
+      child: Card(elevation:3,child:ListTile(
         title: Text(list[index]),
         leading: CircleAvatar(backgroundColor: Colors.orange), //avatar
         trailing: IconButton(
@@ -73,6 +78,29 @@ class _MyWidgetState extends State<MyWidget> {
               removeItem(index);
             }), //button
       ), //tile
+                  ),//c@rd
     ); //transition
   }
 }
+
+
+class FirstPage extends StatefulWidget {
+  @override
+  _FirstPageState createState() => _FirstPageState();
+}
+
+class _FirstPageState extends State<FirstPage> {
+  
+  @override
+void initState() {
+  super.initState() ;
+     
+} 
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(appBar:AppBar(title:Text('tv' ) ), //appbar
+    body :AnimatedList(), //list
+                   );
+  }
+} 
