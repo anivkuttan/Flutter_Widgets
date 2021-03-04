@@ -6,11 +6,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: PageView(
-      children:[
-MyWidget (), 
-        FirstPage (), 
-      ] ), 
+      home: PageView(children: [
+        MyWidget(),
+        FirstPage(),
+      ]),
     );
   }
 }
@@ -29,18 +28,20 @@ class _MyWidgetState extends State<MyWidget> {
         appBar: AppBar(
           title: Text("AppBar"),
           leading: IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-                addItem();
-              }), //button
+            icon: Icon(Icons.add),
+            onPressed: () {
+              addItem();
+            },
+          ), //button
         ), //appbar
         body: Center(
           child: AnimatedList(
-              key: key,
-              initialItemCount: list.length,
-              itemBuilder: (context, index, animation) {
-                return animatedList(context, index, animation);
-              }), //list
+            key: key,
+            initialItemCount: list.length,
+            itemBuilder: (context, index, animation) {
+              return animatedList(context, index, animation);
+            },
+          ), //list
         ) //center
         ); //scaffold
   }
@@ -51,17 +52,18 @@ class _MyWidgetState extends State<MyWidget> {
     // key.currentState.insertItem(index,duration);
     final int i = list.length; //create a variable
     list.insert(i, "Ani kuttan${list.length + 1}");
-    key.currentState.insertItem(i, duration: Duration(seconds: 1));
+    key.currentState.insertItem(
+      i,
+      duration: Duration(seconds: 1),
+    );
   }
 
   removeItem(int i) {
-    
     final AnimatedListRemovedItemBuilder builder = (context, animation) {
-     
       return animatedList(context, i, animation);
     };
-    key. currentState.removeItem(i,builder, duration:Duration(seconds:1) );
-    list. removeAt(i) ;
+    key.currentState.removeItem(i, builder, duration: Duration(seconds: 1));
+    list.removeAt(i);
   }
 
   Widget animatedList(
@@ -69,20 +71,22 @@ class _MyWidgetState extends State<MyWidget> {
     return SlideTransition(
       position: Tween<Offset>(begin: Offset(-1, 0), end: Offset.zero)
           .animate(animation),
-      child: Card(elevation:3,child:ListTile(
-        title: Text(list[index]),
-        leading: CircleAvatar(backgroundColor: Colors.orange), //avatar
-        trailing: IconButton(
+      child: Card(
+        elevation: 3,
+        child: ListTile(
+          title: Text(list[index]),
+          leading: CircleAvatar(backgroundColor: Colors.orange), //avatar
+          trailing: IconButton(
             icon: Icon(Icons.close, color: Colors.red),
             onPressed: () {
               removeItem(index);
-            }), //button
-      ), //tile
-                  ),//c@rd
+            },
+          ), //button
+        ), //tile
+      ), //c@rd
     ); //transition
   }
 }
-
 
 class FirstPage extends StatefulWidget {
   @override
@@ -90,17 +94,39 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
-  
+  GlobalKey<AnimatedListState> key = GlobalKey();
+  List<String> list = ["name", 'age', 'sureName'];
   @override
-void initState() {
-  super.initState() ;
-     
-} 
-  
+  void initState() {
+    super.initState();
+  }
+
+  Widget animationList(BuildContext context, int index, Animation animation) {
+    return ScaleTransition(
+      scale: Tween(begin: 0.4, end: 1.0).animate(animation),
+      child: Card(
+        elevation: 3,
+        child: ListTile(
+          title: Text(list[index]),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar:AppBar(title:Text('tv' ) ), //appbar
-    body :AnimatedList(), //list
-                   );
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('tv'),
+        leading: IconButton(icon: Icon(Icons.cached), onPressed: () {}),
+      ), //appbar
+      body: AnimatedList(
+        key:key,
+        initialItemCount: list.length,
+        itemBuilder: (context, index, animation) =>
+            animationList(context, index, animation),
+      ), //list
+    );
   }
-} 
+}
+
