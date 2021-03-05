@@ -21,7 +21,28 @@ class MyWidget extends StatefulWidget {
 
 class _MyWidgetState extends State<MyWidget> {
   final GlobalKey<AnimatedListState> key = GlobalKey();
-  List<String> list = ["Ani kuttan 1", "Ani kuttan 2", "Ani kuttan 3"];
+  List<String> list = [
+    "Ani kuttan 1",
+    "Ani kuttan 2",
+    "Ani kuttan 3",
+    "hsjsj 4",
+    "Ani kuttan 5",
+    "Ani kuttan 6",
+    "Ani kuttan 7",
+    "Ani kuttan 8",
+    "Ani kuttan 9",
+    "Ani kuttan 10",
+    "Ani kuttan 11",
+    "Ani kuttan 12",
+    "Ani kuttan 13",
+    "Ani kuttan 14",
+    "anikuttan 15",
+    '16',
+    '17',
+    '18',
+    '19',
+    '20'
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +72,7 @@ class _MyWidgetState extends State<MyWidget> {
     // inset to normal list
     // key.currentState.insertItem(index,duration);
     final int i = list.length; //create a variable
-    list.insert(i, "Ani kuttan${list.length + 1}");
+    list.add("Ani kuttan${list.length + 1}");
     key.currentState.insertItem(
       i,
       duration: Duration(seconds: 1),
@@ -95,21 +116,40 @@ class FirstPage extends StatefulWidget {
 
 class _FirstPageState extends State<FirstPage> {
   GlobalKey<AnimatedListState> key = GlobalKey();
-  List<String> list = ["name", 'age', 'sureName'];
+  List<String> list = [
+    
+    "Ani kuttan 1",
+    "Ani kuttan 2",
+    "Ani kuttan 3",
+    "Ani kuttan 4",
+    "Ani kuttan 5",
+    "Ani kuttan 6",
+    "Ani kuttan 7",
+    "Ani kuttan 8",
+    "Ani kuttan 9",
+    "Ani kuttan 10",
+    "Ani kuttan 11",
+    "Ani kuttan 12",
+    "Ani kuttan 13",
+   
+  ];
+  MyWidget book = MyWidget();
 
   @override
   void initState() {
     super.initState();
   }
 
-  Widget animationList(BuildContext context, int index, Animation animation) {
+  Widget animationList(
+      BuildContext context, int index, Animation<double> animation) {
     return ScaleTransition(
       scale: Tween(begin: 0.7, end: 0.9).animate(animation),
       child: Card(
         color: Colors.primaries[index],
         elevation: 3,
         child: ListTile(
-          title: Text(list[index]),
+          title: Text(list[index],
+              style: TextStyle(fontSize: 20, color: Colors.white)),
         ),
       ),
     );
@@ -119,12 +159,12 @@ class _FirstPageState extends State<FirstPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('tv'),
+        title: Text('hw'),
         leading: IconButton(
             icon: Icon(Icons.cached),
             onPressed: () {
-              int i = list.length;
-              list.insert(i, "FatherName");
+              final int i = list.length;
+              list.add("${i + 1}");
               key.currentState.insertItem(i, duration: Duration(seconds: 1));
             }),
       ), //appbar
@@ -138,3 +178,17 @@ class _FirstPageState extends State<FirstPage> {
     );
   }
 }
+
+class FirstPage1 extends StatefulWidget {
+  @override
+  _FirstPage1State createState() => _FirstPage1State();
+}
+
+class _FirstPage1State extends State<FirstPage1> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+    appBar:AppBar(title:Text('gsj' ) ), // appbar
+    );
+  }
+} 
