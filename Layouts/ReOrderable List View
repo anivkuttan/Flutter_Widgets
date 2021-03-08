@@ -29,7 +29,17 @@ class _MyAppState extends State<MyApp> {
       appBar: AppBar(
         title: Text('ReOrderable List'),
         centerTitle: true,
-      ),
+        leading:IconButton(icon:Icon(Icons. edit), onPressed:() {
+setState(() {
+items.sort() ;
+} ) ; 
+        }  ) , //button 1
+        actions:[IconButton(onPressed :() {
+
+        setState(() {items. shuffle() ;} ) ; }, icon:Icon(Icons.android ) ) ], 
+        
+                            
+      ), //appbar 
       body: ReorderableListView(
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         onReorder: reOrder,
