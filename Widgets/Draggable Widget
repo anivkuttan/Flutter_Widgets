@@ -1,97 +1,101 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(MaterialApp(home: MyApp()));
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyWidget(),
-    );
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  String textValue = 'Drag Hear';
+  void dragStarted() {
+    final _snackBar = SnackBar(
+        content: Text('On Dragging........'),
+        duration: Duration(seconds: 1),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)));
+    ScaffoldMessenger.of(context).showSnackBar(_snackBar);
   }
-}
 
-class MyWidget extends StatefulWidget {
-  @override
-  _MyWidgetState createState() => _MyWidgetState();
-}
-
-class _MyWidgetState extends State<MyWidget> {
-  String text = 'AppBar';
-  void dragging() {
-    setState(() {
-      text = 'Dragging.... ';
-    });
+  void dragCompleted() {
+    final _snackBar = SnackBar(
+        content: Text('Drag Completed Done.....'),
+        duration: Duration(seconds: 1),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)));
+    ScaffoldMessenger.of(context).showSnackBar(_snackBar);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(text),
-      ), //appbar
-      body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Center(
-          child: Draggable(
-              data: 'Ani',
-              onDragStarted: dragging,
-              //axis:Axis.horizontal,
-              child: Container(
-                height: 50,
-                width: 50,
-                color: Colors.blue,
-                alignment: Alignment.center,
-                child: Text(
-                  '5',
-                  style:
-                      TextStyle(fontSize: 20, color: Colors.white), //textStyle
-                ), //child container
-              ), //container
-              feedback: Container(
-                height: 50,
-                width: 50,
-                color: Colors.green,
-                alignment: Alignment.center,
-                child: Text('5',
-                    style:
-                        TextStyle(fontSize: 20, color: Colors.white) //textStyle
-                    ), //child container
-              ), //feedback container
-
-              childWhenDragging:
-                  Container(color: Colors.purple, height: 50, width: 50)), //drg
-        ), //cente
-        SizedBox(height: 300),
-        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          Container(
-              color: Colors.green,
+        title: Text('AppBar'),
+      ), //appabr
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Draggable(
+            data: 'Ani',
+            feedback: Container(
+              color: Colors.blue,
               height: 100,
               width: 100,
-              child: DragTarget(
-                onWillAccept:(deta) {
-return true;
-                } , builder: (context, allowedData, rejectedData) {
-                  return Center(
-                  child: Text('5',
-                      style: TextStyle(fontSize: 20, color: Colors.white)),
-                ); //center
-              }, //builder
-                  onAccept: (data) {
-                if (data == 'Ani') {
-                  setState(() {
-                    text = 'Accepted';
-                  });
-                } else {
-                  setState(() {
-                    text = 'Rejected from green';
-                  });
-                }
-              } //onAccept
-                  ) //tragtarge[
-              ), //green container
-          Container(color: Colors.red, height: 100, width: 100)
-        ]), //row
-      ]), //column
+              alignment: Alignment.center,
+              child: Text(
+                'Ani',
+                style: TextStyle(fontSize: 30, color: Colors.white),
+              ),
+            ),
+            child: Container(
+              color: Colors.blue,
+              height: 100,
+              width: 100,
+              alignment: Alignment.center,
+              child: Text('Ani',
+                  style: TextStyle(fontSize: 30, color: Colors.white)),
+            ),
+            childWhenDragging: Container(
+              color: Colors.red,
+              height: 100,
+              width: 100,
+              alignment: Alignment.center,
+              child: Text(
+                'Kuttan',
+                style: TextStyle(fontSize: 30, color: Colors.white),
+              ),
+            ),
+            onDragStarted: dragStarted,
+            onDragCompleted: dragCompleted,
+          ),
+          SizedBox(height: 200),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              DragTarget(
+                builder: (context, allowedData, rejectedData) {
+                  return Container(
+                    height: 100,
+                    width: 100,
+                    alignment: Alignment.center,
+                    color: Colors.purple,
+                    child: Text(
+                      textValue,
+                      style: TextStyle(fontSize: 20, color: Colors.black),
+                    ),
+                  );
+                },
+                onAccept: (data) {
+                  if (data == 'Ani') {
+                    return setState(() {
+                      textValue = 'Ani';
+                    });
+                  }
+                },
+              )
+            ],
+          )
+        ],
+      ),
     );
   }
 }
