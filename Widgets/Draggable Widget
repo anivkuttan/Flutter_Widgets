@@ -27,6 +27,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    Widget containerOrange = Container(color:Colors.orange, height:100,width:100,alignment :Alignment.center, child:Text('Ani',style:TextStyle (fontSize :30, color :Colors.white ),  ), ) ;
     return Scaffold(
       appBar: AppBar(
         title: Text('AppBar'),
@@ -36,35 +37,12 @@ class _MyAppState extends State<MyApp> {
         children: [
           Draggable(
             data: 'Ani',
-            feedback: Container(
-              color: Colors.blue,
-              height: 100,
-              width: 100,
-              alignment: Alignment.center,
-              child: Text(
-                'Ani',
-                style: TextStyle(fontSize: 30, color: Colors.white),
-              ),
-            ),
-            child: Container(
-              color: Colors.blue,
-              height: 100,
-              width: 100,
-              alignment: Alignment.center,
-              child: Text('Ani',
-                  style: TextStyle(fontSize: 30, color: Colors.white)),
-            ),
-            childWhenDragging: Container(
-              color: Colors.red,
-              height: 100,
-              width: 100,
-              alignment: Alignment.center,
-              child: Text(
-                'Kuttan',
-                style: TextStyle(fontSize: 30, color: Colors.white),
-              ),
-            ),
-            onDragStarted: dragStarted,
+            feedback: containerOrange,
+            child:containerOrange, 
+            childWhenDragging: Container(height:100), 
+             
+    
+          onDragStarted: dragStarted,
             onDragCompleted: dragCompleted,
           ),
           SizedBox(height: 200),
