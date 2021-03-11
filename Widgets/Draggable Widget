@@ -8,7 +8,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String textValue = 'Drag Hear';
+  bool accepted = false;
   void dragStarted() {
     final _snackBar = SnackBar(
         content: Text('On Dragging........'),
@@ -27,7 +27,17 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    Widget containerOrange = Container(color:Colors.orange, height:100,width:100,alignment :Alignment.center, child:Text('Ani',style:TextStyle (fontSize :30, color :Colors.white ),  ), ) ;
+    Widget containerOrange = Container(
+      color: Colors.orange,
+      height: 100,
+      width: 100,
+      alignment: Alignment.center,
+      child: Text(
+        'Ani',
+        style: TextStyle(fontSize: 30, color: Colors.white),
+      ),
+    );
+    Widget containerTarget = Container(height:200,width:200,color:Colors.purple,child:accepted? containerOrange:Container() ) ;
     return Scaffold(
       appBar: AppBar(
         title: Text('AppBar'),
@@ -38,11 +48,9 @@ class _MyAppState extends State<MyApp> {
           Draggable(
             data: 'Ani',
             feedback: containerOrange,
-            child:containerOrange, 
-            childWhenDragging: Container(height:100), 
-             
-    
-          onDragStarted: dragStarted,
+            child: containerOrange,
+            childWhenDragging: Container(height: 100),
+            onDragStarted: dragStarted,
             onDragCompleted: dragCompleted,
           ),
           SizedBox(height: 200),
@@ -51,21 +59,12 @@ class _MyAppState extends State<MyApp> {
             children: [
               DragTarget(
                 builder: (context, allowedData, rejectedData) {
-                  return Container(
-                    height: 100,
-                    width: 100,
-                    alignment: Alignment.center,
-                    color: Colors.purple,
-                    child: Text(
-                      textValue,
-                      style: TextStyle(fontSize: 20, color: Colors.black),
-                    ),
-                  );
+                  return containerTarget;
                 },
                 onAccept: (data) {
                   if (data == 'Ani') {
                     return setState(() {
-                      textValue = 'Ani';
+                      accepted = true;
                     });
                   }
                 },
