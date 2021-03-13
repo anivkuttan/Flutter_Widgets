@@ -1,0 +1,59 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyWidget(),
+    );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('DragableScrollable Sheet'),
+      ),
+      body: Stack(children: [
+        Container(
+          color: Colors.grey,
+          width: size.width,
+          height: size.height,
+          alignment: Alignment.center,
+          child: Text('Draggable Scrollable Sheet'),
+        ),
+        DraggableScrollableSheet(
+            initialChildSize: 0.1,
+            minChildSize: 0.1,
+            maxChildSize: 1.0,
+            builder: (context, myController) {
+              return Container(//to decorate the draggable sheet
+                decoration: BoxDecoration(
+                  color: Colors.orange,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20)),
+                ),
+                child: ListView.builder(
+                    controller: myController, //to controll dragg
+                    itemCount: 20,
+                    padding: EdgeInsets.only(top: 2, left: 10, right: 10),
+                    itemBuilder: (context, indext) {
+                      return ListTile(title: Text('Count $indext'));
+                    }),
+              );
+            }),
+      ]),
+    );
+  }
+}
