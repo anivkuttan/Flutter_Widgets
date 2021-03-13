@@ -26,7 +26,7 @@ class _MyWidgetState extends State<MyWidget> {
       ),
       body: Stack(children: [
         Container(
-          color: Colors.grey,
+          color: Colors.white,
           width: size.width,
           height: size.height,
           alignment: Alignment.center,
@@ -35,9 +35,10 @@ class _MyWidgetState extends State<MyWidget> {
         DraggableScrollableSheet(
             initialChildSize: 0.1,
             minChildSize: 0.1,
-            maxChildSize: 1.0,
+            maxChildSize: 0.95,
             builder: (context, myController) {
-              return Container(//to decorate the draggable sheet
+              return Container(
+                //to decorate the draggable sheet
                 decoration: BoxDecoration(
                   color: Colors.orange,
                   borderRadius: BorderRadius.only(
@@ -47,7 +48,7 @@ class _MyWidgetState extends State<MyWidget> {
                 child: ListView.builder(
                     controller: myController, //to controll dragg
                     itemCount: 20,
-                    padding: EdgeInsets.only(top: 2, left: 10, right: 10),
+                    padding: EdgeInsets.only(top: 20, left: 10, right: 10),
                     itemBuilder: (context, indext) {
                       return ListTile(title: Text('Count $indext'));
                     }),
