@@ -1,0 +1,50 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyWidget(),
+    );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  bool isFirst = true;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+            title: Text("AppBar"),
+            leading: IconButton(
+                onPressed: () {
+                  setState(() {
+                    if (isFirst) {
+                      isFirst = false;
+                    } else {
+                      isFirst = true;
+                    }
+                  });
+                },
+                icon: Icon(Icons.add))), //appbar
+        body: Center(
+          child: AnimatedCrossFade(
+              duration: const Duration(seconds: 3),
+              firstChild:
+                  Container(color: Colors.pink, height: 400, width: 200),
+              secondChild:
+                  Container(height: 200, width: 500, color: Colors.purple),
+              crossFadeState: isFirst
+                  ? CrossFadeState.showFirst
+                  : CrossFadeState.showSecond),
+        ) //center
+        );
+  }
+}
