@@ -1,111 +1,55 @@
 import 'package:flutter/material.dart';
 
 void main() {
-
-  runApp(MyApp());
-
-}
-
-class MyApp extends StatelessWidget {
-
-  @override
-
-  Widget build(BuildContext context) {
-
-    return MaterialApp(
-
-      debugShowCheckedModeBanner: false,
-
-      home: Scaffold(
-
-        appBar: AppBar(
-
-          title: Text("Grid View"),
-
-        ), //appbar
-
-        body: Center(
-
-          child: MyWidget(),
-
-        ), //center
-
-      ), //scaffold
-
-    ); //materialapp
-
-  }
-
+  runApp(MyWidget());
 }
 
 class MyWidget extends StatelessWidget {
-
   @override
-
   Widget build(BuildContext context) {
-
-    return Padding(
-
-      padding: EdgeInsets.all(20),
-
-      child: GridView.count(
-
-        crossAxisCount: 2,
-
-        crossAxisSpacing: 8,
-
-        mainAxisSpacing: 8,
-
-        children: <Widget>[
-
-          container(Colors.blue),
-
-          container(Colors.green),
-
-          container(Colors.red),
-
-          container(Colors.yellow),
-
-          container(Colors.purple),
-
-          container(Colors.indigo),
-
-        ],
-
-      ), //gridview
-
+    return MaterialApp(
+      home: FirstPage(),
     );
-
   }
-
 }
 
-Widget container(Color color) {
+class FirstPage extends StatefulWidget {
+  @override
+  _FirstPageState createState() => _FirstPageState();
+}
 
-  return Container(
+class _FirstPageState extends State<FirstPage> {
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text('Grid View '),
+            bottom: TabBar(tabs: [
+              Tab(child: Icon(Icons.face)),
+              Tab(child: Icon(Icons.image))
+            ]),
+          ), //apbar
+          body: TabBarView(children: [
+            FirstPage1(),
+          ]),
+        ));
+  }
+}
 
-    child: RaisedButton(
+class FirstPage1 extends StatefulWidget {
+  @override
+  _FirstPage1State createState() => _FirstPage1State();
+}
 
-      onPressed: () {},
-
-      child: Text("udi"),
-
-      shape: RoundedRectangleBorder(
-
-        borderRadius: BorderRadius.circular(20),
-
-      ), //rect
-
-    ), //button
-
-    decoration: BoxDecoration(
-
-      color: color,
-
-      borderRadius: BorderRadius.circular(30),
-
-    ), //decoration
-
-  );
-
+class _FirstPage1State extends State<FirstPage1> {
+  final List<String> item = List.generate(30,(index){
+    return '$index' ; });
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+    body:GridView.count(
+    crossAxisCount:2,children:List.generate(20,(index){return Card() ;})), );
+  }
 }
