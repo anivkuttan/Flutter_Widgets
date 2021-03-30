@@ -18,6 +18,7 @@ class MyWidget extends StatefulWidget {
 
 class _MyWidgetState extends State<MyWidget> {
   int counter = 0;
+  String pressing = '';
   bool isIgnore = false;
   @override
   Widget build(BuildContext context) {
@@ -34,10 +35,12 @@ class _MyWidgetState extends State<MyWidget> {
         ), //appbar
         body: Center(
             child: Column(children: [
-          Text('$counter', style: TextStyle(fontSize: 30, color: Colors.red)),
+          Text('$pressing : $counter',
+              style: TextStyle(fontSize: 30, color: Colors.red)),
           ElevatedButton(
               onPressed: () {
                 setState(() {
+                  pressing = '1 st button';
                   counter = ++counter;
                 });
               },
@@ -48,10 +51,54 @@ class _MyWidgetState extends State<MyWidget> {
                 child: Text("ingnore botton"),
                 onPressed: () {
                   setState(() {
+                    pressing = '2 nd button';
                     counter += 10;
                   });
                 }), //buyton
           ), //pointer
+          Container(
+            height: 700,
+            width: 500,
+            color: Colors.grey,
+            child: Stack(children: [
+              Positioned(
+                top: 200,
+                left: 200,
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      pressing = 'Pink pressed';
+                      ++counter;
+                    });
+                  },
+                  child: Container(
+                    color: Colors.pink,
+                    height: 350,
+                    width: 250,
+                  ), //inkwell
+                ), //positioned
+              ), //inkwell
+              Positioned(
+                top: 350, left: 250,
+                child: AbsorbPointer
+                   // IgnorePointer
+                (
+                  absorbing: true,
+                 // ignoring: true,
+                  child: InkWell(
+                    onTap: () {
+                      setState(() {
+                        pressing = 'purple pressed';
+                        ++counter;
+                      });
+                    },
+                    child: Container(
+                        color: Colors.deepPurple, height: 200, width: 200),
+                  ), //inkwell
+                ), //absorbpointer
+              ), //positioned
+            ]), //stack
+          ), //container
         ]) //column
             ) //center
         );
