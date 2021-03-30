@@ -1,0 +1,59 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyWidget(),
+    );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  int counter = 0;
+  bool isIgnore = false;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("AppBar"),
+          leading: IconButton(
+              icon: Icon(Icons.android),
+              onPressed: () {
+                setState(() {
+                  isIgnore = !isIgnore;
+                });
+              }),
+        ), //appbar
+        body: Center(
+            child: Column(children: [
+          Text('$counter', style: TextStyle(fontSize: 30, color: Colors.red)),
+          ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  counter = ++counter;
+                });
+              },
+              child: Text('Clickable')), //button
+          IgnorePointer(
+            ignoring: isIgnore,
+            child: ElevatedButton(
+                child: Text("ingnore botton"),
+                onPressed: () {
+                  setState(() {
+                    counter += 10;
+                  });
+                }), //buyton
+          ), //pointer
+        ]) //column
+            ) //center
+        );
+  }
+}
