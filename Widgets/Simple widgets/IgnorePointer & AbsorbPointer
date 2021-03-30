@@ -11,6 +11,18 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/* When AbsorbPointer is top of the widget tree
+ * the hole widget is disable
+ * 
+  AbsorbPointer & IgnorPointer are Same
+  but the different is IgnorePointer 
+  is ignore only child widget and pass the
+  pointer to the below widget.......... 
+  But AbsorbPointer is disable the child and
+  also not given the pointer to below the
+  other widget
+  */
+
 class MyWidget extends StatefulWidget {
   @override
   _MyWidgetState createState() => _MyWidgetState();
@@ -78,17 +90,51 @@ class _MyWidgetState extends State<MyWidget> {
                   ), //inkwell
                 ), //positioned
               ), //inkwell
+  /// - - - - - button - - - - - - - ///
+  // ignore wedget pass the pointer to below widget
+ /// but absorb widget not given pointer to below widget
+              Positioned(
+                top: 20,
+                left: 20,
+                child: SizedBox(
+                  height: 80, width: 130,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: Colors.yellow),
+                      child: Text('button below stack'),
+                      onPressed: () {
+                        setState(() {
+                          pressing = 'stack bello button';
+                          ++counter;
+                        });
+                      }), //button
+                ), //sizedbox
+              ), //positioned
+              Positioned(
+                top: 20, left: 20,
+                child: SizedBox (height:80,width:100,child:IgnorePointer(
+                  ignoring: true,
+                  child: ElevatedButton(
+                      child: Text('ignoring'),
+                      onPressed: () {
+                        setState(() {
+                          pressing = 'ignore button stack';
+                          ++counter;
+                        });
+                      }), //button
+                ), //ignkr
+                                 ), //sizedbox
+              ), //position
+                
               Positioned(
                 top: 350, left: 250,
-                child: AbsorbPointer
-                   // IgnorePointer
-                (
+                child: AbsorbPointer(
                   absorbing: true,
-                 // ignoring: true,
+
                   child: InkWell(
                     onTap: () {
                       setState(() {
                         pressing = 'purple pressed';
+
                         ++counter;
                       });
                     },
