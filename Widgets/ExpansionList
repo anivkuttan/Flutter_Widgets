@@ -1,0 +1,52 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyWidget(),
+    );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  bool isClosed = true;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("AppBar"),
+        ), //appbar
+        body: Center(
+          child: Container(
+            color: Colors.pink, height: double.infinity, width: double.infinity,
+            child: SingleChildScrollView(
+              child: ExpansionPanelList(
+                  expansionCallback: (int item, bool open) {
+                    setState(() {
+                      isClosed = !isClosed;
+                    });
+                  },
+                  children: [
+                    ExpansionPanel(
+                        isExpanded: isClosed,
+                        body: ListTile(
+                          title: Text('This is Body Of Expansion Lost'),
+                        ),
+                        headerBuilder: (BuildContext context, bool expansion) {
+                          return ListTile(title: Text('This is Header'));
+                        }),
+                  ]), //pannel
+            ), //scrollview
+          ), //contaimef
+        ) //center
+        );
+  }
+}
