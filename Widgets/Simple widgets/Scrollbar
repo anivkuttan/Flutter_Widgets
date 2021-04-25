@@ -1,0 +1,44 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyWidget(),
+   //   theme: ThemeData(highlightColor: Colors.red),
+    );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  final List<int> item = List.generate(50, (indext) => indext);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("AppBar"),
+        ), //appbar
+        body: Center(
+            child: RawScrollbar(
+              thumbColor:Colors.red,
+          isAlwaysShown: true,
+          thickness: 20,
+          radius: Radius.circular(20),
+          child: ListView.builder(
+            itemCount: item.length,
+            itemBuilder: (context, indext) {
+              return ListTile(title: Text('${indext.toString()} '));
+            }, //builddr
+          ), //listviewbuilder
+        ) //scrollbar
+            ) //center
+        );
+  }
+}
