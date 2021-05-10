@@ -1,0 +1,85 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Images',
+
+      ///this is app title
+      home: HomePage('Images'),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  final String title;
+  HomePage(this.title);
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+        centerTitle: true,
+      ),
+      body: Center(
+          child: SingleChildScrollView(
+        child: Column(
+          children: [
+            buildImage(),
+            SizedBox(height: 20),
+            buildNetWorkImage(),
+            SizedBox(
+              height: 20,
+            ),
+            Center(child: buildAssetsImage()),
+          ],
+        ),
+      )),
+    );
+  }
+
+  Widget buildImage() {
+    String imageUrl =
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWOOUnw2q930_mN1BNV3UXrbuRt5r-khMQ7w&usqp=CAU';
+    return Image(
+      image: NetworkImage(imageUrl),
+    );
+  }
+
+  Widget buildNetWorkImage() {
+    String networkUrl =
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQibg5f0fBrTxJSacQUfseRAN27xwQD9tId5Q&usqp=CAU';
+    return Image.network(networkUrl,
+        color: Colors.red, //this color apply on image
+        colorBlendMode: BlendMode.darken,
+        /*BlendMode.clear = is clear the image ,
+        BlendMode.color = it's apply the color ,
+        */
+        fit: BoxFit.cover);
+  }
+
+  Widget buildAssetsImage() {
+    String supermanImage = 'assets/superman.jpeg';
+    String batmanImage = 'assets/Batman.jpeg';
+
+    return Column(
+      children: [
+        Image.asset(
+          supermanImage,
+          height: 200,
+          width: 400,
+        ),
+        Image.asset(batmanImage)
+      ],
+    );
+  }
+}
