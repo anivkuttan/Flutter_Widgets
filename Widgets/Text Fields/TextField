@@ -17,13 +17,33 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
+  FocusNode firstTextFieldFocus;
   String _text = 'Unknown';
   bool isHidden = true;
+  @override
+  void initState() {
+    super.initState();
+    firstTextFieldFocus = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    firstTextFieldFocus.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Text Field'),
+        leading: IconButton(
+          onPressed: () {
+            //to requesting focus
+            FocusScope.of(context).requestFocus(firstTextFieldFocus);
+          },
+          icon: Icon(Icons.arrow_back_ios_new),
+        ),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
@@ -31,10 +51,14 @@ class _MyWidgetState extends State<MyWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
+              "Click the back btton to focus the first TextFiled ",
+            ),
+            Text(
               _text,
               style: TextStyle(fontSize: 28, color: Colors.blue),
             ),
             TextField(
+              focusNode: firstTextFieldFocus,
               decoration: InputDecoration(
                 floatingLabelBehavior:
                     FloatingLabelBehavior.always, //never-label text hide
@@ -59,6 +83,7 @@ class _MyWidgetState extends State<MyWidget> {
                 });
               },
             ),
+            SizedBox(height: 30),
             TextField(
               decoration: InputDecoration(
                 counter: ElevatedButton(
@@ -68,6 +93,7 @@ class _MyWidgetState extends State<MyWidget> {
                 hintText: "Enter your full Name",
               ), //Inputdecoration
             ),
+            SizedBox(height: 30),
             TextField(
               autofocus: true, //automatically cursor open in this text field
               decoration: InputDecoration(
@@ -81,6 +107,7 @@ class _MyWidgetState extends State<MyWidget> {
                 ), //textstyle
               ), //input
             ),
+            SizedBox(height: 30),
             TextField(
               enabled: false, //true make it normal
               decoration: InputDecoration(
@@ -95,6 +122,7 @@ class _MyWidgetState extends State<MyWidget> {
                 ), //inputborder
               ), //decoration
             ),
+            SizedBox(height: 30),
             TextField(
               enabled: true,
               decoration: InputDecoration(
@@ -109,6 +137,7 @@ class _MyWidgetState extends State<MyWidget> {
                 ), //border
               ),
             ),
+            SizedBox(height: 30),
             TextField(
               obscureText: isHidden,
               decoration: InputDecoration(
@@ -123,6 +152,7 @@ class _MyWidgetState extends State<MyWidget> {
                         });
                       })),
             ),
+            SizedBox(height: 30),
             TextField(
               obscuringCharacter: '&',
               obscureText: true,
@@ -140,42 +170,41 @@ class _MyWidgetState extends State<MyWidget> {
   }
 }
 
-
-// InputDecoration({Widget icon, 
-// String labelText, 
-// TextStyle labelStyle, 
-// String helperText, 
-// TextStyle helperStyle, 
-// int helperMaxLines, 
-// String hintText, 
-// TextStyle hintStyle, 
-// TextDirection hintTextDirection, 
+// InputDecoration({Widget icon,
+// String labelText,
+// TextStyle labelStyle,
+// String helperText,
+// TextStyle helperStyle,
+// int helperMaxLines,
+// String hintText,
+// TextStyle hintStyle,
+// TextDirection hintTextDirection,
 // int hintMaxLines,
-// String errorText, 
-// TextStyle errorStyle, 
+// String errorText,
+// TextStyle errorStyle,
 // int errorMaxLines,
-// bool hasFloatingPlaceholder = true, 
+// bool hasFloatingPlaceholder = true,
 // FloatingLabelBehavior floatingLabelBehavior,
-// bool isCollapsed = false, 
-// bool isDense, 
-// EdgeInsetsGeometry contentPadding, 
-// Widget prefixIcon, 
+// bool isCollapsed = false,
+// bool isDense,
+// EdgeInsetsGeometry contentPadding,
+// Widget prefixIcon,
 // BoxConstraints prefixIconConstraints,
 // Widget prefix,
-// String prefixText, 
+// String prefixText,
 // TextStyle prefixStyle,
 // Widget suffixIcon,
-// Widget suffix, String suffixText, 
-// TextStyle suffixStyle, 
+// Widget suffix, String suffixText,
+// TextStyle suffixStyle,
 // BoxConstraints suffixIconConstraints,
 // Widget counter, String counterText,
 // TextStyle counterStyle, bool filled,
 // Color fillColor, Color focusColor,
-// Color hoverColor, 
+// Color hoverColor,
 // InputBorder errorBorder,
-// InputBorder focusedBorder, 
+// InputBorder focusedBorder,
 // InputBorder focusedErrorBorder,
 // InputBorder disabledBorder,
-// InputBorder enabledBorder, 
+// InputBorder enabledBorder,
 // InputBorder border,
 // bool enabled = true,
