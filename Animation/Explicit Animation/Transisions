@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
           appBar: AppBar(
-            title: Text('Transision'),
+            title: const Text('Transision'),
             centerTitle: true,
           ), //appbar
           body: PageView(children: [
@@ -27,12 +27,12 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> with TickerProviderStateMixin {
-  AnimationController scaleController;
-  AnimationController sizeController;
-  Animation<double> sizeAnimation;
-  Animation<double> scaleAnimation;
-  AnimationController sliderController;
-  Animation<Offset> sliderAnimation;
+ late AnimationController scaleController;
+ late AnimationController sizeController;
+ late  Animation<double> sizeAnimation;
+  late Animation<double> scaleAnimation;
+  late AnimationController sliderController;
+  late Animation<Offset> sliderAnimation;
 
   @override
   void initState() {
@@ -40,8 +40,8 @@ class _MyWidgetState extends State<MyWidget> with TickerProviderStateMixin {
     //-------------Scale Trainsition--------------//
     scaleController = AnimationController(
         vsync: this,
-        duration: Duration(milliseconds: 400),
-        lowerBound: 0.8,
+        duration: const Duration(seconds: 4),
+        lowerBound: 0.2,
         upperBound: 1)
       ..repeat();
     // lowerBound is lower value
@@ -54,21 +54,21 @@ class _MyWidgetState extends State<MyWidget> with TickerProviderStateMixin {
     //Tween<double>(begin: 0.0, end: 1).animate(controller);
     //--------------Size Transition------------//
     sizeController =
-        AnimationController(vsync: this, duration: Duration(seconds: 2))
+        AnimationController(vsync: this, duration: const Duration(seconds: 2))
           ..repeat();
     sizeAnimation =
         CurvedAnimation(parent: sizeController, curve: Curves.linear);
 
 //----------slider Transition--------------//
     sliderController =
-        AnimationController(vsync: this, duration: Duration(seconds: 2))
+        AnimationController(vsync: this, duration:const Duration(seconds: 2))
           ..repeat(reverse: true);
     //  ..repeat(reverse: true);
     sliderAnimation = Tween<Offset>(
       //begin child position
       //end  child moveing positions
-      begin: Offset(0, 0),
-      end: Offset(2, 0),
+      begin:const Offset(0, 0),
+      end:const Offset(2, 0),
     ).animate(
         CurvedAnimation(parent: sliderController, curve: Curves.elasticIn));
   }
@@ -87,23 +87,25 @@ class _MyWidgetState extends State<MyWidget> with TickerProviderStateMixin {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            const Text('Slide Transition' ), 
             SlideTransition(
-                position: sliderAnimation, child: FlutterLogo(size: 200)),
-            SizedBox(height: 200),
+                position: sliderAnimation, child: const FlutterLogo(size: 200)),
+         const   SizedBox(height: 200),
+            const Text('Scale Transition'), 
             ScaleTransition(
-              // alignment :Alignment(0.1,0.5),
+              alignment :const Alignment(0.1,0.5),
               scale: scaleAnimation,
               child: Container(
                 height: 200,
                 width: 200,
                 alignment: Alignment.center,
-                child: Text('Anikuttan',
+                child: const Text('Anikuttan',
                     style: TextStyle(
                         fontSize: 30,
                         color: Colors.yellow,
                         fontWeight: FontWeight.bold,
                         fontStyle: FontStyle.italic)),
-                decoration: BoxDecoration(
+                decoration:const BoxDecoration(
                   color: Colors.red,
                   borderRadius: BorderRadius.all(
                     Radius.circular(20),
@@ -111,12 +113,14 @@ class _MyWidgetState extends State<MyWidget> with TickerProviderStateMixin {
                 ), //decoration
               ), //child container
             ), //transition
-            SizedBox(height: 200),
+     const       SizedBox(height: 200),
+            const Text ('Size Transition'), 
             SizeTransition(
               sizeFactor: sizeAnimation,
-              axis: Axis.horizontal,
+             axis: Axis.horizontal,
+              //axis:Axis. vertical, 
               axisAlignment: -1,
-              child: FlutterLogo(
+              child: const FlutterLogo(
                 size: 200,
                 textColor: Colors.red,
               ), //flutter logo
@@ -134,17 +138,17 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
-  AnimationController rotationController;
-  Animation<double> rotationAnimation;
-  AnimationController fadeController;
-  Animation<double> fadeAnimation;
+ late AnimationController rotationController;
+ late Animation<double> rotationAnimation;
+ late AnimationController fadeController;
+ late Animation<double> fadeAnimation;
   @override
   void initState() {
     super.initState();
     //-----------Rotation-------------------//
     rotationController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
       //lowerBound :0,
       // upperBound :0.8,
       //value:1,
@@ -162,9 +166,9 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
 //----------------Fade Animation---------------//
     fadeController = AnimationController(
         vsync: this,
-        duration: Duration(seconds: 3),
+        duration:const Duration(seconds: 4),
         value: 0,
-        lowerBound: 0,
+        lowerBound: 0.2,
         upperBound: 1)
       ..repeat();
     fadeAnimation =
@@ -184,23 +188,25 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
       child: SingleChildScrollView(
         child: Column(
           children: [
+const Text ('Fade Trainsition' ), 
             FadeTransition(
               opacity: fadeAnimation,
-              child: Text(
+              child:const Text(
                 'Anikuttan',
                 style: TextStyle(fontSize: 70, fontWeight: FontWeight.bold),
               ), //text
             ), //fadd
-            SizedBox(height: 200),
+           const SizedBox(height: 200),
+const Text ('Rotate Trainsition' ), 
             RotationTransition(
               turns: rotationAnimation,
-              alignment: Alignment(0, 0),
+              alignment:const Alignment(0, 0),
               child: Container(
                 height: 200,
                 width: 200,
                 color: Colors.deepOrange,
                 alignment: Alignment.center,
-                child: Text(
+                child: const Text(
                   'Anikuttan',
                   style: TextStyle(
                       fontSize: 30,
