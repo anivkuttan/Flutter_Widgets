@@ -1,0 +1,76 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: HomePage(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Expansion Panel'),
+      ),
+      body: Column(children: [
+        ExpansionTile(
+            title: Text('Hello'),
+            leading: Icon(Icons.accessibility_new_sharp),
+            subtitle: Text('This is Sub title'),
+            collapsedIconColor: Colors.red,
+            // initiallyExpanded: true,
+            maintainState: true,
+            controlAffinity: ListTileControlAffinity.leading,
+            children: [
+              Text('Children 1'),
+              Text('Cildren 2'),
+            ]),
+        ExpansionTile(
+            title: Text('World'),
+            leading: Icon(Icons.handyman_rounded),
+            subtitle: Text('This is Sub title1'),
+            // initiallyExpanded: true,
+            textColor: Colors.blue,
+            backgroundColor: Colors.yellow,
+            trailing: Icon(CupertinoIcons.airplane),
+            collapsedBackgroundColor: Colors.orangeAccent,
+            maintainState: true,
+            childrenPadding: EdgeInsets.all(30),
+            expandedAlignment: Alignment.bottomRight,
+            children: [
+              Text('Children 3'),
+              Text('Cildren 4'),
+              Text('Children 3'),
+              Text('Cildren 4'),
+              ElevatedButton(
+                onPressed: () {},
+                child: Text('Children 3'),
+              ),
+              Text('Cildren 4'),
+              Text('Children 3'),
+              Text('Cildren 4'),
+            ]),
+      ]),
+    );
+  }
+}
