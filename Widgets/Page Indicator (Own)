@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+*/import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 void main() => runApp(const MyApp());
@@ -122,5 +122,94 @@ class BuidIndicator extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+*/
+
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: MyWidgetClass(),
+      ), //scaffold
+    );
+  }
+}
+
+class MyWidgetClass extends StatefulWidget {
+  @override
+  _MyWidgetClassState createState() => _MyWidgetClassState();
+}
+
+class _MyWidgetClassState extends State<MyWidgetClass> {
+  late PageController controller;
+  @override
+  void initState() {
+    super.initState();
+    controller = PageController();
+  }
+  
+  List<Widget> pageContent=[
+    Container(color:Colors.purple),
+    Container(color:Colors.red),
+    Container(color:Colors.indigo),
+    Container(color:Colors.yellow),
+    Container(color:Colors. blue), 
+  ] ;
+
+  int currentPage = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      Container(
+        height: 500, width: double.infinity,
+        color: Colors.blue,
+        child: PageView(
+            controller: controller,
+            onPageChanged: (pageIndex) {
+              setState(() {
+                currentPage = pageIndex;
+              });
+            },
+            children: pageContent, 
+      
+      
+     ), //pageview
+      ), //container
+      const SizedBox(height: 30),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: _indicator(),
+      ),
+    ]);
+  }
+
+  Widget buildIndicator(bool isActive) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 500),
+      height: 8.0,
+      width: isActive ? 30.0 : 8.0,
+      margin: const EdgeInsets.only(right: 5),
+      decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(24)),
+          color: Colors.red),
+    );
+  }
+
+  List<Widget> _indicator() {
+    List<Widget> list = [];
+    for (int i = 0; i < pageContent.length; i++) {
+      if (currentPage == i) {
+        list.add(buildIndicator(true));
+      } else {
+        list.add(buildIndicator(false));
+      }
+    }
+    return list;
   }
 }
