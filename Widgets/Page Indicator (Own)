@@ -1,0 +1,126 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  late PageController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = PageController(initialPage: 0);
+  }
+
+  int currentIndex = 0;
+  List<Widget> containers = const [
+    BuildContainer(color: Colors.yellow),
+    BuildContainer(color: Colors.red),
+    BuildContainer(color: Colors.pink),
+    BuildContainer(color: Colors.indigo),
+    BuildContainer(color: Colors.blue),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Indicator'),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 400,
+              width: double.infinity,
+              child: PageView(
+                  controller: controller,
+                  onPageChanged: (page) {
+                    setState(() {
+                      currentIndex = page;
+                    });
+                  },
+                  children: containers),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                containers.length,
+                (index) => BuidIndicator(
+                  currentIndex: currentIndex,
+                  index: index,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class BuildContainer extends StatelessWidget {
+  final Color color;
+  const BuildContainer({Key? key, required this.color}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(24),
+      ),
+      alignment: Alignment.center,
+      child: const Text(
+        'Hello',
+        style: TextStyle(fontSize: 30),
+      ),
+    );
+  }
+}
+
+class BuidIndicator extends StatelessWidget {
+  final int currentIndex;
+  final int index;
+  const BuidIndicator(
+      {Key? key, required this.currentIndex, required this.index})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    bool isActive = index == currentIndex;
+    return AnimatedContainer(
+      duration: const Duration(microseconds: 500),
+      curve: Curves.elasticOut,
+      child: Container(
+        height: isActive ? 18.0 : 12.0,
+        width: isActive ? 18.0 : 12.0,
+        margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
+        decoration: BoxDecoration(
+          color: isActive ? Colors.red : Colors.grey,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(24),
+          ),
+        ),
+      ),
+    );
+  }
+}
