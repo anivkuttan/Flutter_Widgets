@@ -341,3 +341,106 @@ class _Widget1State extends State<Widget1> {
     );
   }
 }
+
+
+
+
+
+class MyWidget extends StatefulWidget {
+  const MyWidget({Key? key}) : super(key: key);
+
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Color'),
+      ),
+      body: Center(
+        child: SizedBox(
+          height: 200,
+          width: 200,
+          child: ElevatedButton(
+            onPressed: () {},
+            child: const Text(
+              'Button',
+            ),
+            style: ButtonStyle(
+              // splashFactory: NoSplash.splashFactory,
+              shape: MaterialStateProperty.resolveWith((states) {
+                if (states.contains(MaterialState.pressed)) {
+                  return const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(120),
+                    ),
+                  );
+                } else {
+                  return const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(30),
+                    ),
+                  );
+                }
+              }),
+              elevation: MaterialStateProperty.resolveWith((states) {
+                if (states.contains(MaterialState.hovered)) {
+                  return 30;
+                }
+              }),
+              side: MaterialStateProperty.resolveWith((states) {
+                if (states.contains(MaterialState.pressed)) {
+                  return const BorderSide(color: Colors.black, width: 3);
+                }
+              }),
+              textStyle: bttontextStyle(),
+              overlayColor: MaterialStateProperty.resolveWith((states) {
+                if (states.contains(MaterialState.pressed)) {
+                  return Colors.red;
+                }
+              }),
+              backgroundColor: MaterialStateProperty.resolveWith((states) {
+                if (states.contains(MaterialState.pressed)) {
+                  return Colors.red;
+                } else if (states.contains(MaterialState.hovered)) {
+                  return Colors.purple;
+                }
+              }),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  MaterialStateProperty<TextStyle?> bttontextStyle() {
+    return MaterialStateProperty.resolveWith(
+      (states) {
+        if (states.contains(MaterialState.pressed)) {
+          return TextStyle(
+            fontSize: 20,
+            wordSpacing: 30,
+            // color: Colors.black, // color and Backgrond Color  at the same time
+            foreground: Paint()..color = Colors.black,
+            // backgroundColor: Colors.purple,
+          );
+        } else {
+          return const TextStyle(fontSize: 40, color: Colors.white);
+        }
+      },
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
