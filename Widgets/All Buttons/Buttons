@@ -42,34 +42,34 @@ class _MyWidgetState extends State<MyWidget> {
               context, MaterialPageRoute(builder: (context) => Widget1()));
         },
         backgroundColor: Colors.pink,
-        child: Icon(Icons.add, size: 25),
+        child: const Icon(Icons.add, size: 25),
       ), //FloatingactionButton
       appBar: AppBar(
-        title: Text("All Buttons"),
+        title: const Text("All Buttons"),
       ), //appbar
       body: Center(
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           Text(
             "Comment No:$_data",
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ), //Text
           //-------------Button: 1 -------------//
           ElevatedButton(
             onPressed: () {
               _function("1");
             },
-            child: Text("Elevated Button"),
+            child: const Text("Elevated Button"),
           ), //bhtton
 
           //-------------Button: 2 --------------//
-          ElevatedButton(
+          const ElevatedButton(
             onPressed: null,
             child: Text("Disable Button"),
           ), //elevated button
           //--------------Button: 3 ------------//
           TextButton(
-              child: Text("Text Button"),
+              child: const Text("Text Button"),
               onPressed: () {
                 _function("3");
               }), //textbutton
@@ -78,8 +78,8 @@ class _MyWidgetState extends State<MyWidget> {
             onPressed: () {
               _function("4");
             },
-            label: Text("Elevated.icon"),
-            icon: Icon(Icons.save),
+            label: const Text("Elevated.icon"),
+            icon: const Icon(Icons.save),
           ), //ele ic
           ButtonBar(
             children: [
@@ -88,15 +88,15 @@ class _MyWidgetState extends State<MyWidget> {
                 onPressed: () {
                   _function("5");
                 },
-                child: Text("Style Button"),
+                child: const Text("Style Button"),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.yellow, // primary => backgroundColor
                   onPrimary: Colors.red, // text or icon color
-                  textStyle:
-                      TextStyle(fontSize: 20, fontStyle: FontStyle.italic),
+                  textStyle: const TextStyle(
+                      fontSize: 20, fontStyle: FontStyle.italic),
                   elevation: 30,
                   shadowColor: Colors.deepOrange,
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                 ), //style
               ), //elevatedbutton
 
@@ -106,11 +106,11 @@ class _MyWidgetState extends State<MyWidget> {
                 onPressed: () {
                   _function("6");
                 },
-                child: Text('Border'),
+                child: const Text('Border'),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.orange,
                   onPrimary: Colors.black,
-                  side: BorderSide(width: 2.0, color: Colors.black),
+                  side: const BorderSide(width: 2.0, color: Colors.black),
                 ),
               ), //Elevatedbutto
 //------------------Button: 7 ----------------//
@@ -123,14 +123,14 @@ class _MyWidgetState extends State<MyWidget> {
                         builder: (context) => SpecialButtons(),
                       ));
                 },
-                child: Text('Shape'),
+                child: const Text('Shape'),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.amber,
                   onPrimary: Colors.black,
                   elevation: 25,
-                  padding: EdgeInsets.all(20),
-                  textStyle: TextStyle(fontSize: 20),
-                  shape: RoundedRectangleBorder(
+                  padding: const EdgeInsets.all(20),
+                  textStyle: const TextStyle(fontSize: 20),
+                  shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(25),
                         bottomRight: Radius.circular(25)), //radius
@@ -142,11 +142,11 @@ class _MyWidgetState extends State<MyWidget> {
                 onPressed: () {
                   _function("8");
                 },
-                child: Text("Stadium Border"),
+                child: const Text("Stadium Border"),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.yellow, onPrimary: Colors.red,
-                  side: BorderSide(width: 2, color: Colors.black), //side
-                  shape: StadiumBorder(),
+                  side: const BorderSide(width: 2, color: Colors.black), //side
+                  shape: const StadiumBorder(),
                 ), //style
               ), //elevatedbutto
             ],
@@ -158,12 +158,12 @@ class _MyWidgetState extends State<MyWidget> {
                 onPressed: () {
                   _function("9");
                 },
-                child: Text("Circle"),
+                child: const Text("Circle"),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.yellow, onPrimary: Colors.red,
-                  padding: EdgeInsets.all(30),
-                  side: BorderSide(width: 2, color: Colors.black), //side
-                  shape: CircleBorder(),
+                  padding: const EdgeInsets.all(30),
+                  side: const BorderSide(width: 2, color: Colors.black), //side
+                  shape: const CircleBorder(),
                 ), //style
               ), //elevatedbutton
 //------------------Button: 10 ----------------//
@@ -177,7 +177,7 @@ class _MyWidgetState extends State<MyWidget> {
                       _function("10");
                     },
                     splashColor: Colors.yellow,
-                    child: SizedBox(
+                    child: const SizedBox(
                       height: 70,
                       width: 70,
                       child: Icon(Icons.bluetooth, color: Colors.white),
@@ -191,7 +191,7 @@ class _MyWidgetState extends State<MyWidget> {
                   _function("11");
                 },
                 child: Container(
-                  child: Text(
+                  child: const Text(
                     "Button",
                     style: TextStyle(
                       color: Colors.white,
@@ -200,7 +200,7 @@ class _MyWidgetState extends State<MyWidget> {
                   alignment: Alignment.center,
                   height: 70,
                   width: 70,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Colors.pink, shape: BoxShape.circle), //dexoration
                 ), //contaimer
               ) //inkwell
@@ -224,7 +224,7 @@ class _SpecialButtonState extends State<SpecialButtons> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("SpecialButton"),
+        title: const Text("SpecialButton"),
       ), //appbar
       body: Align(
         alignment: Alignment.bottomLeft,
@@ -235,10 +235,10 @@ class _SpecialButtonState extends State<SpecialButtons> {
           DropdownButton(
               //    hint:Text("DropDown"),//it not #how the seleted value
               hint: _name == "Ani"
-                  ? Text("Select")
+                  ? const Text("Select")
                   : Text(
                       _name,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 15, color: Colors.purple), //textstule
                     ),
               onChanged: (value) {
@@ -301,7 +301,7 @@ class Widget1 extends StatefulWidget {
 
 class _Widget1State extends State<Widget1> {
   String currentMonth = "Jan";
-  List<String> _months = <String>[
+  List<String> _months = const [
     "Jan",
     "Feb",
     "Mar",
@@ -318,7 +318,7 @@ class _Widget1State extends State<Widget1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Button")), //appbar
+      appBar: AppBar(title: const Text("Button")), //appbar
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(currentMonth),
@@ -342,18 +342,14 @@ class _Widget1State extends State<Widget1> {
   }
 }
 
-
-
-
-
-class MyWidget extends StatefulWidget {
-  const MyWidget({Key? key}) : super(key: key);
+class MyWidget1 extends StatefulWidget {
+  const MyWidget1({Key? key}) : super(key: key);
 
   @override
-  _MyWidgetState createState() => _MyWidgetState();
+  _MyWidget1State createState() => _MyWidget1State();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class _MyWidget1State extends State<MyWidget1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -434,13 +430,3 @@ class _MyWidgetState extends State<MyWidget> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
