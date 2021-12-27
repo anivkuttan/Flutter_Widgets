@@ -1,0 +1,61 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: MyWidgetClass(),
+      ), //scaffold
+    );
+  }
+}
+
+class MyWidgetClass extends StatefulWidget {
+  @override
+  _MyWidgetClassState createState() => _MyWidgetClassState();
+}
+
+class _MyWidgetClassState extends State<MyWidgetClass> {
+  String? dropdown1Value;
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Padding(
+              padding: const EdgeInsets.only(right: 30, left: 30),
+              child: button1()),
+        ],
+      ),
+    );
+  }
+
+  Widget button1() {
+    return DropdownButton(
+      hint: const Text('Select'),
+      value: dropdown1Value,
+      onChanged: (String? value) {
+        setState(() {
+          dropdown1Value = value;
+        });
+      },
+      items: ["One", "Two", "Three", "Four", "Five"]
+          .map<DropdownMenuItem<String>>(
+            (e) => DropdownMenuItem(child: Text(e), value: e),
+          )
+          .toList(),
+      icon: const Icon(Icons.menu, color: Colors.blue),
+      isExpanded: true,
+      dropdownColor: Colors.grey,
+      style: const TextStyle(fontSize: 30, color: Colors.purple),
+      //menuMaxHeight:200,
+      iconSize: 30,
+      underline: Container(color: Colors.purple, height: 3.0),
+      borderRadius: const BorderRadius.all(Radius.circular(18)),
+    );
+  }
+}
