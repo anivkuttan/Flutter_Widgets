@@ -27,6 +27,7 @@ class _MyApp extends State<MyApp> {
             });
           },
           items: [
+           // icon and label must to display 
             BottomNavigationBarItem(icon: Icon(Icons.add), label: "add"),
             BottomNavigationBarItem(icon: Icon(Icons.people), label: "people"),
             BottomNavigationBarItem(icon: Icon(Icons.save), label: "save"),
