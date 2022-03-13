@@ -11,12 +11,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
+enum Gender { male, female, other }
+
 class MyWidget extends StatefulWidget {
   @override
   _MyWidgetState createState() => _MyWidgetState();
 }
 
 class _MyWidgetState extends State<MyWidget> {
+  Gender genderValue = Gender.male;
   int groupValue = 0;
   int group = 1;
   String groupString = '';
@@ -24,26 +27,60 @@ class _MyWidgetState extends State<MyWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("AppBar"),
+        title: const Text("AppBar"),
       ), //appba
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Row(children: [
+            Radio<Gender>(
+                value: Gender.male,
+                groupValue: genderValue,
+                onChanged: (value) {
+                  setState(() {
+                    genderValue = value!;
+                  });
+                }), //radio male
+            const Text('Male'), //male text
+          ]),
+          Row(children: [
+            Radio<Gender>(
+                value: Gender.female,
+                groupValue: genderValue,
+                onChanged: (value) {
+                  setState(() {
+                    genderValue = value!;
+                  });
+                }), //radio male
+            const Text('Female'), //male text
+          ]),
+          Row(children: [
+            Radio<Gender>(
+                value: Gender.other,
+                groupValue: genderValue,
+                onChanged: (value) {
+                  setState(() {
+                    genderValue = value!;
+                  });
+                }), //radio male
+            const Text('Other'), //male text
+          ]),
+
           Radio<int>(
               value: 1,
               groupValue: groupValue,
-            activeColor:Colors.purple,
+              activeColor: Colors.purple,
               onChanged: (value) {
                 setState(() {
-                  groupValue = value;
+                  groupValue = value!;
                 });
               }), //radio
           Radio<int>(
               value: 2,
-            activeColor:Colors.purple,
+              activeColor: Colors.purple,
               groupValue: groupValue,
               onChanged: (value) {
                 setState(() {
-                  groupValue = value;
+                  groupValue = value!;
                 });
               }), //radio
           Radio<String>(
@@ -51,7 +88,7 @@ class _MyWidgetState extends State<MyWidget> {
               groupValue: groupString,
               onChanged: (value) {
                 setState(() {
-                  groupString = value;
+                  groupString = value!;
                 });
               }),
           Radio<String>(
@@ -59,16 +96,21 @@ class _MyWidgetState extends State<MyWidget> {
               groupValue: groupString,
               onChanged: (value) {
                 setState(() {
-                  groupString = value;
+                  groupString = value!;
                 });
               }), //raxio
-          ListTile(title:Text('Radio List Tile' ),leading:Radio<int>(value:3,
-                                                                     activeColor:Colors. purple, groupValue:groupValue, onChanged:(value) {
-setState(() {
-groupValue = value;
-} ) ;
-          } ),//radio
-                  ), //tile
+          ListTile(
+            title: const Text('Radio List Tile'),
+            leading: Radio<int>(
+                value: 3,
+                activeColor: Colors.purple,
+                groupValue: groupValue,
+                onChanged: (value) {
+                  setState(() {
+                    groupValue = value!;
+                  });
+                }), //radio
+          ), //tile
         ]), //column
       ), //center
     );
