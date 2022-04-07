@@ -15,6 +15,7 @@ class _MyApp extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
+          // if you not provide current index then bottomNavigation Bar not work
           currentIndex: _currentIndex,
           elevation: 50,
           selectedItemColor: Colors.orange,
