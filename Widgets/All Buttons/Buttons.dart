@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: MyWidget(),
     );
   }
 }
 
 class MyWidget extends StatefulWidget {
+  const MyWidget({super.key});
+
   @override
-  _MyWidgetState createState() => _MyWidgetState();
+  MyWidgetState createState() => MyWidgetState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class MyWidgetState extends State<MyWidget> {
   String _data = "";
-  void _function(String _name) {
+  void _function(String name) {
     setState(() {
-      _data = _name;
+      _data = name;
     });
   } //void function
 
@@ -39,7 +43,9 @@ class _MyWidgetState extends State<MyWidget> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Widget1()));
+            context,
+            MaterialPageRoute(builder: (context) => const Widget1()),
+          );
         },
         backgroundColor: Colors.pink,
         child: const Icon(Icons.add, size: 25),
@@ -88,16 +94,16 @@ class _MyWidgetState extends State<MyWidget> {
                 onPressed: () {
                   _function("5");
                 },
-                child: const Text("Style Button"),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.yellow, // primary => backgroundColor
-                  onPrimary: Colors.red, // text or icon color
+                  foregroundColor: Colors.red,
+                  backgroundColor: Colors.yellow, // text or icon color
                   textStyle: const TextStyle(
                       fontSize: 20, fontStyle: FontStyle.italic),
                   elevation: 30,
                   shadowColor: Colors.deepOrange,
                   padding: const EdgeInsets.all(10),
-                ), //style
+                ),
+                child: const Text("Style Button"), //style
               ), //elevatedbutton
 
               //----------Button: 6 -----------//
@@ -106,12 +112,12 @@ class _MyWidgetState extends State<MyWidget> {
                 onPressed: () {
                   _function("6");
                 },
-                child: const Text('Border'),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.orange,
-                  onPrimary: Colors.black,
+                  foregroundColor: Colors.black,
+                  backgroundColor: Colors.orange,
                   side: const BorderSide(width: 2.0, color: Colors.black),
                 ),
+                child: const Text('Border'),
               ), //Elevatedbutto
 //------------------Button: 7 ----------------//
               ElevatedButton(
@@ -120,13 +126,11 @@ class _MyWidgetState extends State<MyWidget> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SpecialButtons(),
+                        builder: (context) => const SpecialButtons(),
                       ));
                 },
-                child: const Text('Shape'),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.amber,
-                  onPrimary: Colors.black,
+                  foregroundColor: Colors.black, backgroundColor: Colors.amber,
                   elevation: 25,
                   padding: const EdgeInsets.all(20),
                   textStyle: const TextStyle(fontSize: 20),
@@ -135,19 +139,20 @@ class _MyWidgetState extends State<MyWidget> {
                         topLeft: Radius.circular(25),
                         bottomRight: Radius.circular(25)), //radius
                   ), //shape
-                ), //style
+                ),
+                child: const Text('Shape'), //style
               ), //ElevatedButto
 //------------------Button: 8 ----------------//
               ElevatedButton(
                 onPressed: () {
                   _function("8");
                 },
-                child: const Text("Stadium Border"),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.yellow, onPrimary: Colors.red,
+                  foregroundColor: Colors.red, backgroundColor: Colors.yellow,
                   side: const BorderSide(width: 2, color: Colors.black), //side
                   shape: const StadiumBorder(),
-                ), //style
+                ),
+                child: const Text("Stadium Border"), //style
               ), //elevatedbutto
             ],
           ), //buttonba
@@ -158,13 +163,13 @@ class _MyWidgetState extends State<MyWidget> {
                 onPressed: () {
                   _function("9");
                 },
-                child: const Text("Circle"),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.yellow, onPrimary: Colors.red,
+                  foregroundColor: Colors.red, backgroundColor: Colors.yellow,
                   padding: const EdgeInsets.all(30),
                   side: const BorderSide(width: 2, color: Colors.black), //side
                   shape: const CircleBorder(),
-                ), //style
+                ),
+                child: const Text("Circle"), //style
               ), //elevatedbutton
 //------------------Button: 10 ----------------//
 //----------------OtherProperties------------//
@@ -191,17 +196,17 @@ class _MyWidgetState extends State<MyWidget> {
                   _function("11");
                 },
                 child: Container(
+                  alignment: Alignment.center,
+                  height: 70,
+                  width: 70,
+                  decoration: const BoxDecoration(
+                      color: Colors.pink, shape: BoxShape.circle),
                   child: const Text(
                     "Button",
                     style: TextStyle(
                       color: Colors.white,
                     ), //style text
-                  ), // text child
-                  alignment: Alignment.center,
-                  height: 70,
-                  width: 70,
-                  decoration: const BoxDecoration(
-                      color: Colors.pink, shape: BoxShape.circle), //dexoration
+                  ), //dexoration
                 ), //contaimer
               ) //inkwell
             ],
@@ -213,12 +218,14 @@ class _MyWidgetState extends State<MyWidget> {
 }
 
 class SpecialButtons extends StatefulWidget {
+  const SpecialButtons({super.key});
+
   @override
-  _SpecialButtonState createState() => _SpecialButtonState();
+  SpecialButtonState createState() => SpecialButtonState();
 }
 
-class _SpecialButtonState extends State<SpecialButtons> {
-  List<String> _names = ["Ani", "Kuttan", "Anu", "Anikuttan"];
+class SpecialButtonState extends State<SpecialButtons> {
+  final List<String> _names = ["Ani", "Kuttan", "Anu", "Anikuttan"];
   String _name = "Ani";
   @override
   Widget build(BuildContext context) {
@@ -260,7 +267,7 @@ class _SpecialButtonState extends State<SpecialButtons> {
 
 Widget _button1() {
   return PopupMenuButton<int>(
-      offset: Offset(50, 60),
+      offset: const Offset(50, 60),
       itemBuilder: (context) => [
             PopupMenuItem(
               value: 1,
@@ -272,36 +279,38 @@ Widget _button1() {
 Widget _button2() {
   return PopupMenuButton<int>(
       itemBuilder: (context) => [
-            PopupMenuItem(
+            const PopupMenuItem(
               value: 1,
               child: ListTile(title: Text("Anikuttan")),
             ),
           ]);
 }
 
-Widget _button3(String _name) {
+Widget _button3(String name) {
   return PopupMenuButton<String>(
       onSelected: (value) {
-        _name = value;
+        name = value;
       },
       itemBuilder: (context) => [
-            PopupMenuItem(
+            const PopupMenuItem(
               value: "Anikuttan1",
               //This value is pass to onSelected parameter to do something
               child: Text('Anikuttan 1 '),
             ), //menuitem 1
-            PopupMenuItem(value: "u", child: Text(_name)), //item 2
+            PopupMenuItem(value: "u", child: Text(name)), //item 2
           ]);
 }
 
 class Widget1 extends StatefulWidget {
+  const Widget1({super.key});
+
   @override
-  _Widget1State createState() => _Widget1State();
+  Widget1State createState() => Widget1State();
 }
 
-class _Widget1State extends State<Widget1> {
+class Widget1State extends State<Widget1> {
   String currentMonth = "Jan";
-  List<String> _months = const [
+  final List<String> _months = const [
     "Jan",
     "Feb",
     "Mar",
@@ -346,10 +355,10 @@ class MyWidget1 extends StatefulWidget {
   const MyWidget1({Key? key}) : super(key: key);
 
   @override
-  _MyWidget1State createState() => _MyWidget1State();
+  MyWidget1State createState() => MyWidget1State();
 }
 
-class _MyWidget1State extends State<MyWidget1> {
+class MyWidget1State extends State<MyWidget1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -362,9 +371,6 @@ class _MyWidget1State extends State<MyWidget1> {
           width: 200,
           child: ElevatedButton(
             onPressed: () {},
-            child: const Text(
-              'Button',
-            ),
             style: ButtonStyle(
               // splashFactory: NoSplash.splashFactory,
               shape: MaterialStateProperty.resolveWith((states) {
@@ -386,17 +392,20 @@ class _MyWidget1State extends State<MyWidget1> {
                 if (states.contains(MaterialState.hovered)) {
                   return 30;
                 }
+                return null;
               }),
               side: MaterialStateProperty.resolveWith((states) {
                 if (states.contains(MaterialState.pressed)) {
                   return const BorderSide(color: Colors.black, width: 3);
                 }
+                return null;
               }),
               textStyle: bttontextStyle(),
               overlayColor: MaterialStateProperty.resolveWith((states) {
                 if (states.contains(MaterialState.pressed)) {
                   return Colors.red;
                 }
+                return null;
               }),
               backgroundColor: MaterialStateProperty.resolveWith((states) {
                 if (states.contains(MaterialState.pressed)) {
@@ -404,7 +413,11 @@ class _MyWidget1State extends State<MyWidget1> {
                 } else if (states.contains(MaterialState.hovered)) {
                   return Colors.purple;
                 }
+                return null;
               }),
+            ),
+            child: const Text(
+              'Button',
             ),
           ),
         ),
