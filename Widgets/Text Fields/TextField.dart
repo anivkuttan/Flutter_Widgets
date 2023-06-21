@@ -270,3 +270,17 @@ class MyWidgetState extends State<MyWidget> {
     );
   }
 }
+/// TextField auto height to certain height 
+/* Container(
+              constraints: const BoxConstraints(maxHeight: 100, minHeight: 50),
+              color: Colors.green,
+              child: Row(
+                children: const [
+                  Flexible(
+                    child: TextField(
+                      maxLines: null,
+                    ),
+                  ),
+                ],
+              ),
+            )  */
