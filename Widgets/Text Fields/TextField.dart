@@ -284,3 +284,7 @@ class MyWidgetState extends State<MyWidget> {
                 ],
               ),
             )  */
+//bottom counter length visibility
+// inputFormatters: [
+//    LengthLimitingTextInputFormatter(4),
+//    ],
