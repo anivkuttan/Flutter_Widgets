@@ -2,31 +2,35 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: HomePage(),
     );
   }
 }
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
-  _HomePageState createState() => _HomePageState();
+  State createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  AnimationController controller;
+  late AnimationController controller;
 
   @override
   void initState() {
     super.initState();
     controller =
-        AnimationController(vsync: this, duration: Duration(seconds: 3))
+        AnimationController(vsync: this, duration: const Duration(seconds: 3))
           ..repeat();
   }
 
@@ -40,7 +44,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Animation Builder'),
+        title: const Text('Animation Builder'),
       ), //appbar
       body: Center(
         child: Column(
@@ -53,7 +57,7 @@ class _HomePageState extends State<HomePage>
                   height: 200,
                   width: 200,
                   alignment: Alignment.center,
-                  child: Text('Container'),
+                  child: const Text('Container'),
                 ), //container
                 builder: (context, child) {
                   return Transform.rotate(
