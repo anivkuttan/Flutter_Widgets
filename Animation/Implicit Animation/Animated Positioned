@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: MyWidget(),
     );
   }
 }
 
 class MyWidget extends StatefulWidget {
+  const MyWidget({super.key});
+
   @override
   _MyWidgetState createState() => _MyWidgetState();
 }
@@ -25,7 +29,7 @@ class _MyWidgetState extends State<MyWidget> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.orange,
-          title: Text("AppBar"),
+          title: const Text("AppBar"),
         ), //appbar
         body: Center(
           child: Stack(children: [
@@ -38,7 +42,7 @@ class _MyWidgetState extends State<MyWidget> {
                 left: 80,
                 child: Container(color: Colors.green, height: 300, width: 300)),
             AnimatedPositioned(
-              duration: Duration(seconds: 1),
+              duration: const Duration(seconds: 1),
               top: top,
               left: left,
               curve: Curves.elasticIn,
@@ -53,14 +57,14 @@ class _MyWidgetState extends State<MyWidget> {
               bottom: 300,
               left: 200,
               child: ElevatedButton(
-                  child: Text('Animate'),
                   onPressed: () {
                     setState(() {
-                     top = top == 200 ? top = 700 : top = 200;
+                      top = top == 200 ? top = 700 : top = 200;
                       left = left == 200 ? left = 400 : left = 200;
                     });
                   },
-                  style: ElevatedButton.styleFrom(primary: Colors.red)),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                  child: const Text('Animate')),
             ), //button
           ]), //stack
         ) //center
