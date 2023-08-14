@@ -13,25 +13,26 @@ class MyApp extends StatelessWidget {
 
 class HomePage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  State createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   bool isPlaying = false;
-  AnimationController animationController;
-  Animation<double> animation;
-
+  late AnimationController animationController;
+  late Animation<double> animation;
+  @override
   void initState() {
     super.initState();
     animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 200),
     );
     animation =
         CurvedAnimation(parent: animationController, curve: Curves.bounceInOut);
   }
 
+  @override
   void dispose() {
     super.dispose();
     animationController.dispose();
@@ -41,7 +42,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Animation'),
+        title: const Text('Animation'),
       ), //appBAr
       body: Center(
         child: Column(
@@ -49,7 +50,7 @@ class _HomePageState extends State<HomePage>
           children: [
             IconButton(
               onPressed: () {},
-              icon: Icon(Icons.add),
+              icon: const Icon(Icons.add),
             ), //iconbutton
             InkWell(
               child: AnimatedIcon(
