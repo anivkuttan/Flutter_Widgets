@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: MyWidget(),
     );
@@ -15,6 +17,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyWidget extends StatefulWidget {
+  const MyWidget({super.key});
+
   @override
   _MyWidget createState() => _MyWidget();
 }
@@ -40,24 +44,24 @@ class _MyWidget extends State<MyWidget> {
             children: <Widget>[
               InkWell(
                 child: AnimatedContainer(
-                  duration: Duration(seconds: 3),
+                  duration: const Duration(seconds: 3),
                   curve: Curves.fastOutSlowIn,
                   height: _height,
-                  width: _width, 
-                  alignment:Alignment.center,
+                  width: _width,
+                  alignment: Alignment.center,
                   color: Colors.orange,
-                  child: Text('InkWell Tap'),
+                  child: const Text('InkWell Tap'),
                   // alignment:Alignment.center,
                 ),
                 onTap: () {
                   animatedFunction();
                 },
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () {
                   animatedFunction();
                 },
-                child: Text('Animate'),
+                child: const Text('Animate'),
               ),
               InkWell(
                 onTap: () {
@@ -66,10 +70,12 @@ class _MyWidget extends State<MyWidget> {
                   });
                 },
                 child: AnimatedContainer(
-                  duration: Duration(seconds: 2),
+                  duration: const Duration(seconds: 2),
                   height: isExpand ? 400 : 200,
                   width: isExpand ? 400 : 200,
-                  decoration:BoxDecoration(color:isExpand? Colors.yellow : Colors.purple, shape:BoxShape.circle) ,//decoration
+                  decoration: BoxDecoration(
+                      color: isExpand ? Colors.yellow : Colors.purple,
+                      shape: BoxShape.circle), //decoration
                 ), //container
               ), //inkwell
             ]),
