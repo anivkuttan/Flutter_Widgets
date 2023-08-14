@@ -1,42 +1,43 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: MyWidget(),
     );
   }
 }
 
 class MyWidget extends StatefulWidget {
+  const MyWidget({super.key});
+
   @override
-  _MyWidgetState createState() => _MyWidgetState();
+  State createState() => _MyWidgetState();
 }
 
 class _MyWidgetState extends State<MyWidget>
     with SingleTickerProviderStateMixin {
-  AnimationController controller;
-  Animation changeColor;
+  late AnimationController controller;
+  late Animation changeColor;
 
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: 2)) ;
-    changeColor = CurvedAnimation(parent:controller, curve:Curves.slowMiddle)  ;
-    
-   
+    controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 2));
+    changeColor = CurvedAnimation(parent: controller, curve: Curves.slowMiddle);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("AppBar"),
+        title: const Text("AppBar"),
       ), //appbar
       body: Center(
         child: Container(height: 400, width: 400, color: Colors.blue),
@@ -44,4 +45,3 @@ class _MyWidgetState extends State<MyWidget>
     );
   }
 }
-
