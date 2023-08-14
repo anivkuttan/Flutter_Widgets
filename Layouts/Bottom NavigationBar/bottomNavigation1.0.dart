@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
-  _MyApp createState() => _MyApp();
+  State createState() => _MyApp();
 }
 
 class _MyApp extends State<MyApp> {
   int _currentIndex = 0;
-  final _body = [Tab1(),Tab2(),Tab3()];
+  final _body = [const Tab1(), const Tab2(), const Tab3()];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,15 +29,15 @@ class _MyApp extends State<MyApp> {
               _currentIndex = index;
             });
           },
-          items: [
-           // icon and label must to display 
+          items: const [
+            // icon and label must to display
             BottomNavigationBarItem(icon: Icon(Icons.add), label: "add"),
             BottomNavigationBarItem(icon: Icon(Icons.people), label: "people"),
             BottomNavigationBarItem(icon: Icon(Icons.save), label: "save"),
           ], //items
         ), //navigationbar
         appBar: AppBar(
-          title: Text("BottomNAvigation Bar"),
+          title: const Text("BottomNAvigation Bar"),
         ), //appbar
         body: _body[_currentIndex],
       ), //scaffold
@@ -44,23 +46,28 @@ class _MyApp extends State<MyApp> {
 }
 
 class Tab1 extends StatelessWidget {
+  const Tab1({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Container(color:Colors.red);
+    return Container(color: Colors.red);
   }
 }
 
 class Tab2 extends StatelessWidget {
+  const Tab2({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Container(color:Colors.yellow);
+    return Container(color: Colors.yellow);
   }
 }
 
 class Tab3 extends StatelessWidget {
+  const Tab3({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-    color:Colors.green);
+    return Container(color: Colors.green);
   }
 }
