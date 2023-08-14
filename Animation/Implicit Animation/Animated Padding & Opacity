@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -12,6 +14,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyWidget extends StatefulWidget {
+  const MyWidget({super.key});
+
   @override
   _MyWidgetState createState() => _MyWidgetState();
 }
@@ -23,17 +27,17 @@ class _MyWidgetState extends State<MyWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("AppBar"),
+        title: const Text("AppBar"),
       ), //appba
       body: ListView(
         children: [
           AnimatedOpacity(
-            duration: Duration(seconds: 1),
+            duration: const Duration(seconds: 1),
             opacity: _opacity,
-            child: Icon(Icons.favorite, size: 90, color: Colors.red),
+            child: const Icon(Icons.favorite, size: 90, color: Colors.red),
           ), //animeopacity
           ElevatedButton(
-            child: Text('Click Me'),
+            child: const Text('Click Me'),
             onPressed: () {
               setState(() {
                 _opacity = _opacity == 1 ? 0.5 : 1;
@@ -41,9 +45,9 @@ class _MyWidgetState extends State<MyWidget> {
             },
           ), //butto
           AnimatedPadding(
-            duration: Duration(seconds: 2),
-            curve:Curves.fastOutSlowIn, 
-            padding: EdgeInsets.only(left:_padding),
+            duration: const Duration(seconds: 2),
+            curve: Curves.fastOutSlowIn,
+            padding: EdgeInsets.only(left: _padding),
             child:
                 Container(height: 200, width: 200, color: Colors.pink), //child
           ), //container
@@ -53,7 +57,7 @@ class _MyWidgetState extends State<MyWidget> {
                 _padding = _padding == 0 ? 300 : 0;
               });
             },
-            child: Text('Padding'),
+            child: const Text('Padding'),
           ), //text button
         ],
       ), //listview
