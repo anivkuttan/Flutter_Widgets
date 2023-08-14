@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: PageView(children: [
-        //  MyWidget(),
+      home: PageView(children: const [
+        MyWidget(),
         FirstPage1(),
       ]),
     );
@@ -15,8 +17,10 @@ class MyApp extends StatelessWidget {
 }
 
 class MyWidget extends StatefulWidget {
+  const MyWidget({super.key});
+
   @override
-  _MyWidgetState createState() => _MyWidgetState();
+  State createState() => _MyWidgetState();
 }
 
 class _MyWidgetState extends State<MyWidget> {
@@ -47,9 +51,9 @@ class _MyWidgetState extends State<MyWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("AppBar"),
+          title: const Text("AppBar"),
           leading: IconButton(
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
             onPressed: () {
               addItem();
             },
@@ -73,32 +77,34 @@ class _MyWidgetState extends State<MyWidget> {
     // key.currentState.insertItem(index,duration);
     final int i = list.length; //create a variable
     list.add("Ani kuttan${list.length + 1}");
-    key.currentState.insertItem(
+    key.currentState?.insertItem(
       i,
-      duration: Duration(seconds: 1),
+      duration: const Duration(seconds: 1),
     );
   }
 
   removeItem(int i) {
-    final AnimatedListRemovedItemBuilder builder = (context, animation) {
+    builder(context, animation) {
       return animatedList(context, i, animation);
-    };
-    key.currentState.removeItem(i, builder, duration: Duration(seconds: 1));
+    }
+
+    key.currentState
+        ?.removeItem(i, builder, duration: const Duration(seconds: 1));
     list.removeAt(i);
   }
 
   Widget animatedList(
       BuildContext context, int index, Animation<double> animation) {
     return SlideTransition(
-      position: Tween<Offset>(begin: Offset(-1, 0), end: Offset.zero)
+      position: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero)
           .animate(animation),
       child: Card(
         elevation: 3,
         child: ListTile(
           title: Text(list[index]),
-          leading: CircleAvatar(backgroundColor: Colors.orange), //avatar
+          leading: const CircleAvatar(backgroundColor: Colors.orange), //avatar
           trailing: IconButton(
-            icon: Icon(Icons.close, color: Colors.red),
+            icon: const Icon(Icons.close, color: Colors.red),
             onPressed: () {
               removeItem(index);
             },
@@ -110,8 +116,10 @@ class _MyWidgetState extends State<MyWidget> {
 }
 
 class FirstPage extends StatefulWidget {
+  const FirstPage({super.key});
+
   @override
-  _FirstPageState createState() => _FirstPageState();
+  State createState() => _FirstPageState();
 }
 
 class _FirstPageState extends State<FirstPage> {
@@ -131,7 +139,7 @@ class _FirstPageState extends State<FirstPage> {
     "Ani kuttan 12",
     "Ani kuttan 13",*/
   ];
-  MyWidget book = MyWidget();
+  MyWidget book = const MyWidget();
 
   @override
   void initState() {
@@ -141,14 +149,15 @@ class _FirstPageState extends State<FirstPage> {
   Widget animationList(
       BuildContext context, int index, Animation<double> animation) {
     return SlideTransition(
-      position: Tween<Offset>(begin: Offset(0.5, 0), end: Offset(0, 0))
+      position: Tween<Offset>(
+              begin: const Offset(0.5, 0), end: const Offset(0, 0))
           .animate(CurvedAnimation(parent: animation, curve: Curves.elasticIn)),
       child: Card(
         color: Colors.primaries[index],
         elevation: 3,
         child: ListTile(
           title: Text(list[index],
-              style: TextStyle(fontSize: 20, color: Colors.white)),
+              style: const TextStyle(fontSize: 20, color: Colors.white)),
         ),
       ),
     );
@@ -158,13 +167,14 @@ class _FirstPageState extends State<FirstPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('hw'),
+        title: const Text('hw'),
         leading: IconButton(
-            icon: Icon(Icons.cached),
+            icon: const Icon(Icons.cached),
             onPressed: () {
               final int i = list.length;
               list.add("${i + 1}");
-              key.currentState.insertItem(i, duration: Duration(seconds: 1));
+              key.currentState
+                  ?.insertItem(i, duration: const Duration(seconds: 1));
             }),
       ), //appbar
       body: AnimatedList(
@@ -179,35 +189,48 @@ class _FirstPageState extends State<FirstPage> {
 }
 
 class FirstPage1 extends StatefulWidget {
+  const FirstPage1({super.key});
+
   @override
   _FirstPage1State createState() => _FirstPage1State();
 }
 
 class _FirstPage1State extends State<FirstPage1> {
-  GlobalKey <AnimatedListState> key = GlobalKey() ;
-  List<int> list = [1,2,];
+  GlobalKey<AnimatedListState> key = GlobalKey();
+  List<int> list = [
+    1,
+    2,
+  ];
 
   Widget itembuilder(
       BuildContext context, int index, Animation<double> animation) {
     return FadeTransition(
         opacity: Tween<double>(begin: 0, end: 1).animate(animation),
-        child:
-            Container(height: 100, color:Colors.primaries[index], width:500, alignment:Alignment.center,  child :Text('${list[index]}' , style:TextStyle (color:Colors. white, fontSize:28) ) ));
+        child: Container(
+            height: 100,
+            color: Colors.primaries[index],
+            width: 500,
+            alignment: Alignment.center,
+            child: Text('${list[index]}',
+                style: const TextStyle(color: Colors.white, fontSize: 28))));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading:IconButton(icon:Icon(Icons.add), onPressed:() {
-          final int i = list. length;
-list. add(i+1) ;
-          key.currentState.insertItem(i, duration:Duration (seconds:2) ) ;
-        }  ) , 
-        title: Text('gsj'),
+        leading: IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              final int i = list.length;
+              list.add(i + 1);
+              key.currentState
+                  ?.insertItem(i, duration: const Duration(seconds: 2));
+            }),
+        title: const Text('gsj'),
       ), // appba
       body: AnimatedList(
-        key:key, 
+        key: key,
         initialItemCount: list.length,
         itemBuilder: (context, index, animation) {
           return itembuilder(context, index, animation);
